@@ -1,0 +1,30 @@
+name: prophet
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch
+  - pytorch
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - conda-forge
+  - defaults
+dependencies:
+  - numpy=1.21.2=py39h20f2e39_0
+  - opt_einsum=3.3.0=pyhd8ed1ab_1
+  - pip=21.2.4=py39h06a4308_0
+  - python=3.9.11=h12debd9_2
+  - pytorch=1.12.0=py3.9_cuda11.3_cudnn8.3.2_0
+  - rich=12.5.1=py39h06a4308_0
+  - torchvision=0.13.0=py39_cu113
+  - yaml=0.2.5=h7b6447c_0
+  - pip:
+    - git+https://github.com/openai/CLIP.git@v1.0
+    - einops==0.6.0
+    - huggingface-hub==0.12.1
+    - openai==0.18.0
+    - opencv-python==4.5.5.64
+    - pillow==9.3.0
+    - pyyaml==6.0
+    - sentence-transformers==2.2.2
+    - sentencepiece==0.1.96
+    - tokenizers==0.11.6
+    - tqdm==4.63.0
+    - transformers==4.26.1
+
