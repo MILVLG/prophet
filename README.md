@@ -130,8 +130,10 @@ The extracted answer heuristics will be stored as `candidates.json` and `example
 You may need the `candidates.json` and `examples.json` files generated in the former stage to step into this stage. **Or you can just skip stage one, and use the files of answer heuristics we provided in `assets`.** To prompt GPT-3 with answer heuristics and generate better answers, run the following command:
 
 ```shell
-$ bash scripts/prompt.sh  --task ok --version {your_version_name} \
-    --examples_path {path_to_examples_file} \  --candidate_path {path_to_candidate_file} \
+$ bash scripts/prompt.sh \
+    --task ok --version {your_version_name} \
+    --examples_path {path_to_examples_file} \ 
+    --candidates_path {path_to_candidate_file} \
     --openai_key {your_openai_api_key}
 ```
 
