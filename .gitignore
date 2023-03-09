@@ -11,4 +11,6 @@ outputs/logs/*
 !outputs/logs/.gitkeep
 outputs/results/*
 !outputs/results/.gitkeep
+preds/*
+!preds/.gitkeep
 tmp

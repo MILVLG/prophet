@@ -5,8 +5,7 @@ prophet
 │   ├── answer_dict_okvqa.json
 │   ├── answer_dict_vqav2.json
 │   ├── candidates_okvqa.json
-│   ├── captions_okvqa.json
-│   └── prophet_predictions_okvqa.json
+│   └── captions_okvqa.json
 ├── ckpts
 │   ├── mcan_ft_okvqa.pkl
 │   └── mcan_pt_okvqa.pkl
@@ -59,6 +58,9 @@ prophet
 │   ├── ckpts
 │   ├── logs
 │   └── results
+├── preds
+│   ├── mcan_530_okvqa.json
+│   └── prophet_611_okvqa.json
 ├── prophet
 │   ├── __init__.py
 │   ├── stage1
