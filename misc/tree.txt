@@ -1,0 +1,94 @@
+prophet
+├── assets
+│   ├── answer_aware_examples_okvqa.json
+│   ├── answer_dict_aokvqa.json
+│   ├── answer_dict_okvqa.json
+│   ├── answer_dict_vqav2.json
+│   ├── candidates_okvqa.json
+│   └── captions_okvqa.json
+├── ckpts
+│   ├── mcan_ft_okvqa.pkl
+│   └── mcan_pt_okvqa.pkl
+├── configs
+│   ├── finetune.yml
+│   ├── path_cfgs.py
+│   ├── pretrain.yml
+│   ├── prompt.yml
+│   ├── task_cfgs.py
+│   └── task_to_split.py
+├── datasets
+│   ├── aokvqa
+│   │   ├── aokvqa_v1p0_test.json
+│   │   ├── aokvqa_v1p0_train.json
+│   │   └── aokvqa_v1p0_val.json
+│   ├── coco2014
+│   ├── coco2014_feats
+│   ├── coco2017
+│   ├── coco2017_feats
+│   ├── okvqa
+│   │   ├── mscoco_train2014_annotations.json
+│   │   ├── mscoco_val2014_annotations.json
+│   │   ├── OpenEnded_mscoco_train2014_questions.json
+│   │   └── OpenEnded_mscoco_val2014_questions.json
+│   └── vqav2
+│       ├── v2_mscoco_train2014_annotations.json
+│       ├── v2_mscoco_val2014_annotations.json
+│       ├── v2_OpenEnded_mscoco_train2014_questions.json
+│       ├── v2_OpenEnded_mscoco_val2014_questions.json
+│       ├── v2valvg_no_ok_annotations.json
+│       ├── v2valvg_no_ok_questions.json
+│       ├── vg_annotations.json
+│       └── vg_questions.json
+├── environment.yml
+├── evaluation
+│   ├── ans_punct.py
+│   ├── aok_utils
+│   │   ├── eval_predictions.py
+│   │   ├── load_aokvqa.py
+│   │   └── remap_predictions.py
+│   ├── aokvqa_evaluate.py
+│   ├── okvqa_evaluate.py
+│   └── vqa_utils
+│       ├── vqaEval.py
+│       └── vqa.py
+├── main.py
+├── misc
+│   └── framework.png
+├── outputs
+│   ├── ckpts
+│   ├── logs
+│   └── results
+├── preds
+│   ├── mcan_530_okvqa.json
+│   └── prophet_611_okvqa.json
+├── prophet
+│   ├── __init__.py
+│   ├── stage1
+│   │   ├── finetune.py
+│   │   ├── heuristics.py
+│   │   ├── model
+│   │   │   ├── layers.py
+│   │   │   ├── mcan_for_finetune.py
+│   │   │   ├── mcan.py
+│   │   │   ├── net_utils.py
+│   │   │   └── rope2d.py
+│   │   ├── pretrain.py
+│   │   └── utils
+│   │       ├── load_data.py
+│   │       ├── optim.py
+│   └── stage2
+│       ├── prompt.py
+│       └── utils
+│           ├── data_utils.py
+│           ├── fancy_pbar.py
+├── README.md
+├── scripts
+│   ├── evaluate_model.sh
+│   ├── extract_img_feats.sh
+│   ├── finetune.sh
+│   ├── heuristics_gen.sh
+│   ├── pretrain.sh
+│   └── prompt.sh
+└── tools
+    ├── extract_img_feats.py
+    └── transforms.py

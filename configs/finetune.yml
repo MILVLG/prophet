@@ -1,0 +1,37 @@
+# Network
+IMG_RESOLUTION: 512
+IMG_FEAT_GRID: 16
+IMG_FEAT_SIZE: 4096
+BERT_VERSION: bert-large-uncased
+MAX_TOKEN: 32
+ARCH_CEIL: {
+  enc: ['SA', 'FFN'],
+  dec: ['SA_v', 'GA', 'FFN'],
+}
+LANG_FEAT_SIZE: 1024
+LAYER: 6
+HIDDEN_SIZE: 1024
+FF_SIZE: 4096
+MULTI_HEAD: 8
+DROPOUT_R: 0.1
+FLAT_MLP_SIZE: 1024
+FLAT_GLIMPSES: 1
+FLAT_OUT_SIZE: 2048
+
+# Training
+BATCH_SIZE: 64
+EVAL_BATCH_SIZE: 64
+BERT_LR_MULT: 0.01
+LR_BASE: 0.00005
+LR_DECAY_R: 0.2
+LR_DECAY_LIST: [5,]
+WARMUP_EPOCH: 0
+MAX_EPOCH: 6
+GRAD_NORM_CLIP: -1
+OPT: AdamW
+OPT_PARAMS: {betas: '(0.9, 0.98)', eps: '1e-9'}
+## optimizer for finetuning warmup (i.e., only update the new appended parameters as a warm-up)
+EPOPH_FTW: 1
+OPT_FTW: Adam
+LR_BASE_FTW: 0.001
+OPT_PARAMS_FTW: {betas: '(0.9, 0.98)', eps: '1e-9'}

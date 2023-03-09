@@ -1,0 +1,10 @@
+MODEL: text-davinci-002
+TEMPERATURE: 0.
+MAX_TOKENS: 8
+SLEEP_PER_INFER: 10
+
+PROMPT_HEAD: "Please answer the question according to the context and candidate answers. Each candidate answer is associated with a confidence score within a bracket. The true answer may not be included in the candidate answers.\n\n"
+LINE_PREFIX: "===\n"
+N_EXAMPLES: 20
+K_CANDIDATES: 10
+T_INFER: 5
