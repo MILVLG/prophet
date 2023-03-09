@@ -156,7 +156,7 @@ $ bash scripts/eval_file.sh \
 
 using the provideded models we obtain the corresponding prediction files, resulting in the results in the following table:
 
-| Model | MCAN | [Prophet](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EUqH0N4fLVdPsLYJ48Wl_gsBneZzyGR23Tv5P9RskOBwNQ?download=1) |
+| Model | MCAN | Prophet |
 | :---: | :---: | :---: |
 | OK-VQA Accuracy | 53.0% | [61.1%]((https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EUqH0N4fLVdPsLYJ48Wl_gsBneZzyGR23Tv5P9RskOBwNQ?download=1)) |
 
