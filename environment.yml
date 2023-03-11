@@ -13,9 +13,8 @@ dependencies:
   - pytorch=1.12.0=py3.9_cuda11.3_cudnn8.3.2_0
   - rich=12.5.1=py39h06a4308_0
   - torchvision=0.13.0=py39_cu113
-  - yaml=0.2.5=h7b6447c_0
   - pip:
-    - git+https://github.com/openai/CLIP.git@v1.0
+    - pyyaml==6.0
     - einops==0.6.0
     - huggingface-hub==0.12.1
     - openai==0.18.0
@@ -27,4 +26,5 @@ dependencies:
     - tokenizers==0.11.6
     - tqdm==4.63.0
     - transformers==4.26.1
+    - git+https://github.com/openai/CLIP.git
 
