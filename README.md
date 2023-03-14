@@ -25,7 +25,7 @@ To conduct the following experiments, a machine with at least 1 RTX 3090 GPU, 50
 Following software is needed:
 
 1. [Python](https://www.python.org/downloads/) >= 3.9
-2. [Cuda](https://developer.nvidia.com/cuda-toolkit) >= 11.6
+2. [Cuda](https://developer.nvidia.com/cuda-toolkit) >= 11.3
 3. [Pytorch](https://pytorch.org/get-started/locally/) >= 12.0
 5. what you can find in [environment.yml](environment.yml)
 

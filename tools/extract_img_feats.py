@@ -14,6 +14,7 @@ from PIL import Image
 import clip
 from tqdm import tqdm
 import argparse
+from pathlib import Path
 
 from configs.task_cfgs import Cfgs
 from configs.task_to_split import *
@@ -30,6 +31,7 @@ def _extract_feat(img_path, net, T, save_path):
     clip_feats = clip_feats.transpose(1, 2, 0)
     # print(clip_feats.shape, save_path)
     # return
+    Path(save_path).parent.mkdir(parents=True, exist_ok=True)
     np.savez(
         save_path,
         x=clip_feats,
