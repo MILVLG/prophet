@@ -94,7 +94,7 @@ class Cfgs(PATH):
         self.EVAL_NOW = True
         if self.RUN_MODE == 'pretrain' or self.TASK == 'aok_test':
             self.EVAL_NOW = False
-        print(f'Eval Now: {self.EVAL_NOW}')
+        # print(f'Eval Now: {self.EVAL_NOW}')
 
         # ------------------------
         # ---- Model Training ----

@@ -14,10 +14,11 @@ from PIL import Image
 import clip
 from tqdm import tqdm
 import argparse
+from pathlib import Path
 
 from configs.task_cfgs import Cfgs
 from configs.task_to_split import *
-from .transforms import _transform
+from tools.transforms import _transform
 
 
 @torch.no_grad()
@@ -30,6 +31,7 @@ def _extract_feat(img_path, net, T, save_path):
     clip_feats = clip_feats.transpose(1, 2, 0)
     # print(clip_feats.shape, save_path)
     # return
+    Path(save_path).parent.mkdir(parents=True, exist_ok=True)
     np.savez(
         save_path,
         x=clip_feats,
@@ -82,6 +84,7 @@ if __name__ == '__main__':
     parser.add_argument('--dataset', dest='dataset', help='dataset name, e.g., ok, aok', type=str, required=True)
     parser.add_argument('--gpu', dest='GPU', help='gpu id', type=str, default='0')
     parser.add_argument('--clip_model', dest='CLIP_VERSION', help='clip model name or local model checkpoint path', type=str, default='RN50x64')
+    parser.add_argument('--img_resolution', dest='IMG_RESOLUTION', help='image resolution', type=int, default=512)
     args = parser.parse_args()
     __C = Cfgs(args)
     main(__C, args.dataset)
