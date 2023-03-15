@@ -76,7 +76,7 @@ class Runner:
         prompt_text = line_prefix + f'Context: {capt}\n'
         prompt_text += line_prefix + f'Question: {ques}\n'
         cands_with_conf = [f'{cand["answer"]}({cand["confidence"]:.2f})' for cand in cands]
-        cands = '/ '.join(cands_with_conf)
+        cands = ', '.join(cands_with_conf)
         prompt_text += line_prefix + f'Candidates: {cands}\n'
         prompt_text += line_prefix + 'Answer:'
         if ans is not None:
