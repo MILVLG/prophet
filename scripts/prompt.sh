@@ -13,8 +13,8 @@ while [[ $# -gt 0 ]]; do
     --examples_path)
       EXAMPLES_PATH="$2"
       shift 2;;
-    --candidate_path)
-      CANDIDATE_PATH="$2"
+    --candidates_path)
+      CANDIDATES_PATH="$2"
       shift 2;;
     --captions_path)
       CAPTIONS_PATH="$2"
@@ -31,7 +31,7 @@ done
 TASK=${TASK:-ok} # task name, one of ['ok', 'aok_val', 'aok_test'], default 'ok'
 VERSION=${VERSION:-"prompt_okvqa"} # version name, default 'prompt_for_$TASK'
 EXAMPLES_PATH=${EXAMPLES_PATH:-"assets/answer_aware_examples_okvqa.json"} # path to the examples, default is the result from our experiments
-CANDIDATE_PATH=${CANDIDATE_PATH:-"assets/candidates_okvqa.pkl"} # path to the candidates, default is the result from our experiments
+CANDIDATES_PATH=${CANDIDATES_PATH:-"assets/candidates_okvqa.pkl"} # path to the candidates, default is the result from our experiments
 CAPTIONS_PATH=${CAPTIONS_PATH:-"assets/captions_okvqa.pkl"} # path to the captions, default is the result from our experiments
 OPENAI_KEY=${OPENAI_KEY:-""} # path to the captions
 
@@ -41,6 +41,6 @@ python main.py \
     --version $VERSION \
     --cfg configs/prompt.yml \
     --examples_path $EXAMPLES_PATH \
-    --candidate_path $CANDIDATE_PATH \
+    --candidates_path $CANDIDATES_PATH \
     --captions_path $CAPTIONS_PATH \
     --openai_key $OPENAI_KEY
