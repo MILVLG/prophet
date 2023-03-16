@@ -37,7 +37,7 @@ OPENAI_KEY=${OPENAI_KEY:-""} # path to the captions
 
 # CUDA_VISIBLE_DEVICES=$GPU \
 python main.py \
-    --task $TASK --run_mode heuristics \
+    --task $TASK --run_mode prompt \
     --version $VERSION \
     --cfg configs/prompt.yml \
     --examples_path $EXAMPLES_PATH \
