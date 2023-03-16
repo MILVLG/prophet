@@ -126,14 +126,14 @@ class Runner:
             json.load(open(self.__C.EXAMPLES_PATH, 'r'))
         )
 
-        if 'aok' in self.__C.TASK:
-            from evaluation.aokvqa_evaluate import Evaluater
-        else:
-            from evaluation.okvqa_evaluate import Evaluater
-        evaluater = Evaluater(
-            self.valset.annotation_path,
-            self.valset.question_path
-        )
+        # if 'aok' in self.__C.TASK:
+        #     from evaluation.aokvqa_evaluate import AOKEvaluater as Evaluater
+        # else:
+        #     from evaluation.okvqa_evaluate import OKEvaluater as Evaluater
+        # evaluater = Evaluater(
+        #     self.valset.annotation_path,
+        #     self.valset.question_path
+        # )
 
         infer_times = self.__C.T_INFER
         N_inctx = self.__C.N_EXAMPLES
@@ -178,7 +178,7 @@ class Runner:
             else:
                 answer = sorted(ans_pool.items(), key=lambda x: x[1], reverse=True)[0][0]
             
-            evaluater.add(qid, answer)
+            self.evaluater.add(qid, answer)
             self.cache[qid] = {
                 'question_id': qid,
                 'answer': answer,
@@ -192,7 +192,7 @@ class Runner:
                     rt_accuracy = self.valset.rt_evaluate(self.cache.values())
                     info_column.info = f'Acc: {rt_accuracy}'
 
-        evaluater.save(self.__C.RESULT_PATH)
+        self.evaluater.save(self.__C.RESULT_PATH)
         if self.__C.EVAL_NOW:
             with open(self.__C.LOG_PATH, 'a+') as logfile:
                 self.evaluater.evaluate(logfile)
