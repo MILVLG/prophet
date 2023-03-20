@@ -54,7 +54,7 @@ class Runner(object):
         net.cuda()
         # Define the multi-gpu training if needed
         if self.__C.N_GPU > 1:
-            net = nn.DataParallel(net)
+            net = nn.DataParallel(net, device_ids=self.__C.GPU_IDS)
 
         # Define the binary cross entropy loss
         loss_fn = torch.nn.BCEWithLogitsLoss(reduction='sum')
