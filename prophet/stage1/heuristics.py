@@ -45,7 +45,7 @@ class Runner(object):
             net.load_state_dict(ckpt['state_dict'], strict=False)
             net.cuda()
             if self.__C.N_GPU > 1:
-                net = nn.DataParallel(net, device_ids=self.__C.GPU)
+                net = nn.DataParallel(net, device_ids=self.__C.GPU_IDS)
             print('Finish!')
             self.net = net
         else:
