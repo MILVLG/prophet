@@ -110,7 +110,7 @@ class Qid2Data(Dict):
 
         k = __C.K_CANDIDATES
         if annotated:
-            print(f'Loaded dataset size: {len(self)}, top{k} accuracy: {self.topk_accuracy(k)*100:.2f}, top1 accuracy: {self.topk_accuracy(1)*100:.2f}')
+            print(f'Loaded dataset size: {len(self.qid_to_data)}, top{k} accuracy: {self.topk_accuracy(k)*100:.2f}, top1 accuracy: {self.topk_accuracy(1)*100:.2f}')
         
         if similar_examples:
             for qid in similar_examples:
