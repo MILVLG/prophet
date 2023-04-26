@@ -97,10 +97,10 @@ class DataSet(Data.Dataset):
 
         # indexing data, note that all question_id is set to str,
         # and all image_id is set to int
-        if len(ans_list) == len(ques_list):
+        if len(self.ans_list) == len(self.ques_list):
             self.annotated = True
             self.qids = [str(ans['question_id']) for ans in self.ans_list]
-        elif len(ans_list) < len(ques_list):
+        elif len(self.ans_list) < len(self.ques_list):
             self.annotated = False
             self.qids = [str(ques['question_id']) for ques in self.ques_list]
         else:

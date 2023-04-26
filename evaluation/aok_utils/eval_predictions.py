@@ -11,10 +11,10 @@ def eval_aokvqa(dataset, preds, multiple_choice=False, strict=True):
     if isinstance(dataset, list):
         dataset = { dataset[i]['question_id'] : dataset[i] for i in range(len(dataset)) }
 
-    print(f'Loaded dataset size: {len(dataset)}')
+    # print(f'Loaded dataset size: {len(dataset)}')
     if multiple_choice is False:
         dataset = {k:v for k,v in dataset.items() if v['difficult_direct_answer'] is False}
-    print(f'Loaded dataset size: {len(dataset)}')
+    # print(f'Loaded dataset size: {len(dataset)}')
 
     if strict:
         dataset_qids = set(dataset.keys())
