@@ -150,7 +150,7 @@ $ bash scripts/prompt.sh \
 For the task of `ok` and `aok_val` whose annotations are available, the scores are automatically computed after finetuning and prompting. You can also evaluate the result files that outputted after finetuning or prompting, by run
 
 ```shell
-$ bash scripts/eval_file.sh \
+$ bash scripts/evaluate_file.sh \
     --task ok --result_path outputs/results/okvqa_prompt_1/result.json
 ```
 
