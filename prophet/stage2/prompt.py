@@ -90,7 +90,7 @@ class Runner:
         for key in example_qids:
             ques = self.trainset.get_question(key)
             caption = self.trainset.get_caption(key)
-            cands = self.trainset.get_topk_answers(key)
+            cands = self.trainset.get_topk_candidates(key)
             gt_ans = self.trainset.get_most_answer(key)
             examples.append((ques, caption, cands, gt_ans))
             prompt_text += self.sample_make(ques, caption, cands, ans=gt_ans)
@@ -145,7 +145,7 @@ class Runner:
                 continue
             ques = self.valset.get_question(qid)
             caption = self.valset.get_caption(qid)
-            cands = self.valset.get_topk_answers(qid, self.__C.K_CANDIDATES)
+            cands = self.valset.get_topk_candidates(qid, self.__C.K_CANDIDATES)
 
             prompt_query = self.sample_make(ques, caption, cands)
             example_qids = self.valset.get_similar_qids(qid, k=infer_times * N_inctx)
@@ -174,7 +174,7 @@ class Runner:
             
             # vote
             if len(ans_pool) == 0:
-                answer = self.valset.get_topk_answers(qid, 1)[0]['answer']
+                answer = self.valset.get_topk_candidates(qid, 1)[0]['answer']
             else:
                 answer = sorted(ans_pool.items(), key=lambda x: x[1], reverse=True)[0][0]
             
