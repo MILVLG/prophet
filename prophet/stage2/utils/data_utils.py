@@ -90,22 +90,31 @@ class Qid2Data(Dict):
             caption = iid_to_capt[iid].strip()
             if caption[-1] != '.':
                 caption += '.'
-            ans2score = _score(a_item['answers']) if annotated else None
-
-            most_answer = list(ans2score.keys())[0]
-            if most_answer == '':
-                most_answer = list(ans2score.keys())[1]
             
             qid_to_data[qid] = {
                 'question_id': qid,
                 'image_id': iid,
                 'question': q_item['question'],
-                'answers': a_item['answers'],
-                'most_answer': most_answer,
-                'gt_scores': ans2score,
-                'topk_answers': t_item,
+                # 'most_answer': most_answer,
+                # 'gt_scores': ans2score,
+                'topk_candidates': t_item,
                 'caption': caption,
             }
+            if annotated:
+                if 'answers' in a_item:
+                    answers = a_item['answers']
+                else:
+                    answers = a_item['direct_answers']
+
+                ans2score = _score(answers)
+
+                most_answer = list(ans2score.keys())[0]
+                if most_answer == '':
+                    most_answer = list(ans2score.keys())[1]
+                
+                qid_to_data[qid]['most_answer'] = most_answer
+                qid_to_data[qid]['gt_scores'] = ans2score
+
         self.qid_to_data = qid_to_data
 
         k = __C.K_CANDIDATES
@@ -139,16 +148,20 @@ class Qid2Data(Dict):
     
     
     def get_gt_answers(self, qid):
+        if not self.annotated:
+            return None
         return self[qid]['gt_scores']
     
     def get_most_answer(self, qid):
+        if not self.annotated:
+            return None
         return self[qid]['most_answer']
 
-    def get_topk_answers(self, qid, k=None):
+    def get_topk_candidates(self, qid, k=None):
         if k is None:
-            return self[qid]['topk_answers']
+            return self[qid]['topk_candidates']
         else:
-            return self[qid]['topk_answers'][:k]
+            return self[qid]['topk_candidates'][:k]
     
     def get_similar_qids(self, qid, k=None):
         similar_qids = self[qid]['similar_qids']
@@ -157,13 +170,16 @@ class Qid2Data(Dict):
         return similar_qids
     
     def evaluate_by_threshold(self, ans_set, threshold=1.0):
+        if not self.annotated:
+            return -1
+        
         total_score = 0.0
         for item in ans_set:
             qid = item['question_id']
-            topk_answers = self.get_topk_answers(qid)
-            top1_confid = topk_answers[0]['confidence']
+            topk_candidates = self.get_topk_candidates(qid)
+            top1_confid = topk_candidates[0]['confidence']
             if top1_confid > threshold:
-                answer = topk_answers[0]['answer']
+                answer = topk_candidates[0]['answer']
             else:
                 answer = item['answer']
             gt_answers = self.get_gt_answers(qid)
@@ -172,15 +188,18 @@ class Qid2Data(Dict):
         return total_score / len(ans_set)
     
     def topk_accuracy(self, k=1, sub_set=None):
+        if not self.annotated:
+            return -1
+        
         total_score = 0.0
         if sub_set is not None:
             qids = sub_set
         else:
             qids = list(self.qid_to_data.keys())
         for qid in qids:
-            topk_answers = self.get_topk_answers(qid)[:k]
+            topk_candidates = self.get_topk_candidates(qid)[:k]
             gt_answers = self.get_gt_answers(qid)
-            score_list = [gt_answers.get(a['answer'], 0.0) for a in topk_answers]
+            score_list = [gt_answers.get(a['answer'], 0.0) for a in topk_candidates]
             total_score += max(score_list)
         return total_score / len(qids)
     
