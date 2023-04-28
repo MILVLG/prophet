@@ -9,7 +9,11 @@ This repository is the official implementation of the Prophet, a two stage frame
 
 ## Updates
 April 28, 2023
-- Pre-trained and finetuned models of Prophet on the A-OKVQA dataset.
+- Add pretrained and finetuned models on A-OKVOA.
+
+March 10, 2023
+- Training and testing codes of the two-stages Prophet framework.
+- Pretrained and finetuned models on OK-VOA.
 
 ## Table of Contents
 
