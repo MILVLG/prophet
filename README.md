@@ -266,7 +266,7 @@ Using the provideded models we obtain the corresponding prediction files, result
 
 
 <table border="2">
-<tr><th align="center"> OK-VQA</th><th> AOK-VAL </th><th> AOK-TEST </th></tr>
+<tr><th> OK-VQA</th><th> A-OKVQA (val) </th><th> A-OKVQA (test) </th></tr>
 <tr><td>
 
 | MCAN | Prophet |
