@@ -285,13 +285,6 @@ Using the provideded models we obtain the corresponding prediction files, result
 </td></tr>
 </table>
 
-
-| Model | MCAN | Prophet |
-| :---: | :---: | :---: |
-| OK-VQA Accuracy | [53.0%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EVPAUDjTWX9Gn3GIqj7JwUoB5HMWwL3SRnNf18dSckJBOw?download=1) | [61.1%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EUqH0N4fLVdPsLYJ48Wl_gsBneZzyGR23Tv5P9RskOBwNQ?download=1) |
-| AOK-VAL Accuracy | [52.0%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EdBYZeS55iFEjdlOhUbyWRsBtYnQ3-zerho13mYj2YQ0Ag?download=1) | [58.2%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EXDUxT3_LrpDugZ7xj-0BMYBynuFDJQS88M3EGeFEhU5dg?download=1) |
-| AOK-TEST Accuracy | 45.6% |55.7% |
-
 For the task of `aok_test`, you need to submit the result file to the [A-OKVQA Leaderboard](https://leaderboard.allenai.org/a-okvqa/submissions/public) to evaluate the result.
 
 
