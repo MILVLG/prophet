@@ -82,7 +82,6 @@ class Qid2Data(Dict):
         # anno_set = anno_set['annotations']
         for qid in qid_to_ques:
             q_item = qid_to_ques[qid]
-            a_item = qid_to_anno[qid]
             qid = str(qid)
             t_item = qid_to_topk[qid]
 
@@ -101,6 +100,7 @@ class Qid2Data(Dict):
                 'caption': caption,
             }
             if annotated:
+                a_item = qid_to_anno[qid]
                 if 'answers' in a_item:
                     answers = a_item['answers']
                 else:
