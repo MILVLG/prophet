@@ -4,11 +4,20 @@ prophet
 │   ├── answer_dict_aokvqa.json
 │   ├── answer_dict_okvqa.json
 │   ├── answer_dict_vqav2.json
+│   ├── candidates_aokvqa_test.json
+│   ├── candidates_aokvqa_val.json
 │   ├── candidates_okvqa.json
-│   └── captions_okvqa.json
+│   ├── captions_aokvqa.json
+│   ├── captions_okvqa.json
+│   ├── examples_aokvqa_test.json.json
+│   └── examples_aokvqa_val.json.json
 ├── ckpts
+│   ├── mcan_ft_aokvqa_test.pkl
+│   ├── mcan_ft_aokvqa_val.pkl
 │   ├── mcan_ft_okvqa.pkl
-│   └── mcan_pt_okvqa.pkl
+│   ├── mcan_pt_aokvqa_test.pkl
+│   └── mcan_pt_aokvqa_val.pkl
+│   ├── mcan_pt_okvqa.pkl
 ├── configs
 │   ├── finetune.yml
 │   ├── path_cfgs.py
