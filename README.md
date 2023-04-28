@@ -162,11 +162,11 @@ $ bash scripts/prompt.sh \
 The result file will be stored as `result.json` in `outputs/results/{your_version_name}` directory.
 
 
-We also provided command example of `aok_val` and `aok_test` on Prophet.
+We also provide example scripts for the `aok_val` and `aok_test` modes on A-OKVQA.
 <details>
 <summary>Click to expand</summary>
 
-### 2. A-OKVQA_val
+### 2. A-OKVQA (val)
 
 #### **Stage one**
 Similary, for task of `aok_val`, run pretraining step with commands:
@@ -210,7 +210,7 @@ The result file will be stored as `result.json` in `outputs/results/{your_versio
 
 
 
-### 3. A-OKVQA_test
+### 3. A-OKVQA (test)
 
 For task of `aok_val`, run pretraining step with commands:
 #### **Stage one**
