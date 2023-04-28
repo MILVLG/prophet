@@ -20,9 +20,13 @@ TASK=${TASK:-ok} # task name, one of ['ok', 'aok_val', 'aok_test'], default 'ok'
 RESULT_PATH=${RESULT_PATH:-"preds/prophet_611_okvqa.json"} # path to the result file, default is the result from our experiments
 
 if [ $TASK == "ok" ]; then
-  python evaluation/okvqa_evaluate.py --result_path $RESULT_PATH
+  python -m evaluation.okvqa_evaluate --result_path $RESULT_PATH \
+    --question_path 'datasets/okvqa/OpenEnded_mscoco_val2014_questions.json' \
+    --annotation_path 'datasets/okvqa/mscoco_val2014_annotations.json'
 elif [ $TASK == "aok_val" ]; then
-  python evaluation/aokvqa_evaluate.py --result_path $RESULT_PATH
+  python -m evaluation.aokvqa_evaluate --result_path $RESULT_PATH \
+    --dataset_path 'datasets/aokvqa/aokvqa_v1p0_val.json' \
+    --direct_answer --multiple_choice
 elif [ $TASK == "aok_test" ]; then
   echo "Please submit your result to the AOKVQA leaderboard."
 else

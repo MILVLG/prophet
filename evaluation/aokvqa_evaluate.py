@@ -13,7 +13,7 @@ class AOKEvaluater:
     def __init__(self, annotation_path: str, question_path: str):
         self.annotation_path = annotation_path
         self.question_path = question_path
-        self.dataset = json.load(open(annotation_path, 'r'))
+        self.dataset = json.load(open(question_path, 'r'))
         self.result_file = {}
         self.result_path = None
         self.multiple_choice = False
@@ -99,5 +99,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     dataset = json.load(open(args.dataset_path, 'r'))
     result = json.load(open(args.result_path, 'r'))
-    result_str = _evaluate()
+    result_str = _evaluate(dataset, result, direct_answer=args.direct_answer, multiple_choice=args.multiple_choice)
     print(result_str)

@@ -16,20 +16,18 @@ __C.override_from_dict(yaml_dict)
 print(__C)
 
 # build runner
-if __C.TASK == 'aok_val':
-    print('EVAL_ANSWER_PATH: ', __C.EVAL_ANSWER_PATH)
-    print('EVAL_QUESTION_PATH: ', __C.EVAL_QUESTION_PATH)
+if __C.RUN_MODE == 'pretrain':
+    evaluater = None
+elif 'aok' in __C.TASK:
     evaluater = AOKEvaluater(
         __C.EVAL_ANSWER_PATH,
         __C.EVAL_QUESTION_PATH,
     )
-elif __C.TASK == 'ok':
+else:
     evaluater = OKEvaluater(
         __C.EVAL_ANSWER_PATH,
         __C.EVAL_QUESTION_PATH,
     )
-else:
-    evaluater = None
 
 runner = get_runner(__C, evaluater)
 

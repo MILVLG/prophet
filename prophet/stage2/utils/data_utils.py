@@ -58,7 +58,7 @@ class Qid2Data(Dict):
             if 'questions' in _ques_set:
                 _ques_set = _ques_set['questions']
             ques_set += _ques_set
-        qid_to_ques = {q['question_id']: q for q in ques_set}
+        qid_to_ques = {str(q['question_id']): q for q in ques_set}
 
         if annotated:
             anno_set = []
@@ -68,7 +68,7 @@ class Qid2Data(Dict):
                 if 'annotations' in _anno_set:
                     _anno_set = _anno_set['annotations']
                 anno_set += _anno_set
-            qid_to_anno = {a['question_id']: a for a in anno_set}
+            qid_to_anno = {str(a['question_id']): a for a in anno_set}
         
         qid_to_topk = json.load(open(__C.CANDIDATES_PATH))
         # qid_to_topk = {t['question_id']: t for t in topk}
@@ -82,8 +82,6 @@ class Qid2Data(Dict):
         # anno_set = anno_set['annotations']
         for qid in qid_to_ques:
             q_item = qid_to_ques[qid]
-            a_item = qid_to_anno[qid]
-            qid = str(qid)
             t_item = qid_to_topk[qid]
 
             iid = str(q_item['image_id'])
@@ -101,6 +99,7 @@ class Qid2Data(Dict):
                 'caption': caption,
             }
             if annotated:
+                a_item = qid_to_anno[qid]
                 if 'answers' in a_item:
                     answers = a_item['answers']
                 else:

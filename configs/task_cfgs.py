@@ -169,8 +169,8 @@ class Cfgs(PATH):
     
     @property
     def EVAL_QUESTION_PATH(self):
-        if not self.EVAL_NOW:
-            return []
+        # if not self.EVAL_NOW:
+        #     return []
         return self.QUESTION_PATH[self.EVAL_SPLITS[0]]
     
     @property
