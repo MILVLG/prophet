@@ -99,5 +99,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     dataset = json.load(open(args.dataset_path, 'r'))
     result = json.load(open(args.result_path, 'r'))
-    result_str = _evaluate()
+    result_str = _evaluate(dataset, result, direct_answer=args.direct_answer, multiple_choice=args.multiple_choice)
     print(result_str)
