@@ -271,17 +271,17 @@ Using the provideded models we obtain the corresponding prediction files, result
 
 | MCAN | Prophet |
 |--|--|
-| 85.57\% | 85.95\% |
+| [53.0%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EVPAUDjTWX9Gn3GIqj7JwUoB5HMWwL3SRnNf18dSckJBOw?download=1) | [61.1%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EUqH0N4fLVdPsLYJ48Wl_gsBneZzyGR23Tv5P9RskOBwNQ?download=1) |
 </td><td>
 
 | MCAN | Prophet |
 |--|--|
-| 76.65\% | 81.14\% |
+| [52.0%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EdBYZeS55iFEjdlOhUbyWRsBtYnQ3-zerho13mYj2YQ0Ag?download=1) |[58.2%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EXDUxT3_LrpDugZ7xj-0BMYBynuFDJQS88M3EGeFEhU5dg?download=1) |
 </td><td>
 
 | MCAN | Prophet |
 |--|--|
-| 75.16\% | 79.55\% |
+| 45.6% | 55.7% |
 </td></tr>
 </table>
 
