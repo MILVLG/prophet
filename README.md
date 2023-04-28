@@ -101,7 +101,7 @@ We provide bash scripts for each stage of the Prophet framework. You can find th
 
 - `--task`: specify the task (i.e., the target dataset) you want to deal with. The available options are `ok` (training on `train` set of OK-VQA and evaluating on the `test` set of OK-VQA), `aok_val` (training on `train` set of A-OKVQA and evaluating on the `val` set of A-OKVQA) and `aok_test` (training on `train` set and `val` set of A-OKVQA and evaluating on the `test` set of A-OKVQA);
 
-Note that although Prophet uses VQA v2 datasets for pre-training, there are slight differences in how the datasets are used for different tasks (`ok`, `aok_val`, and `aok_test`), as detailed in [configs/task_to_split.py](configs/task_to_split.py). This means that different pre-training instructions need to be followed for each task.
+Note that although Prophet uses VQA v2 datasets for pre-training, there are slight differences in how the datasets are used for different tasks (`ok`, `aok_val`, and `aok_test`), as detailed in [configs/task_to_split.py](configs/task_to_split.py). This means that different pre-training commands need to be followed for each task.
 
 - `--version`: specify the version name of this run. This name will be used to create a new folder in the `outputs` directory to store the results of this run.
 
