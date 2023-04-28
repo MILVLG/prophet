@@ -16,7 +16,9 @@ __C.override_from_dict(yaml_dict)
 print(__C)
 
 # build runner
-if 'aok' in __C.TASK:
+if __C.RUN_MODE == 'pretrain':
+    evaluater = None
+elif 'aok' in __C.TASK:
     evaluater = AOKEvaluater(
         __C.EVAL_ANSWER_PATH,
         __C.EVAL_QUESTION_PATH,
