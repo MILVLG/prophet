@@ -262,7 +262,7 @@ $ bash scripts/evaluate_file.sh \
     --task ok --result_path outputs/results/okvqa_prompt_1/result.json
 ```
 
-Using the provideded models and evaluation script above, we obtain the prediction files that result in the accuracies in the following table, respectively.
+Using the corresponding result files and evaluation script above, we obtain the accuracies in the following table, respectively.
 
 
 <table border="2">
