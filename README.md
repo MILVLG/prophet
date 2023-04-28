@@ -264,6 +264,28 @@ $ bash scripts/evaluate_file.sh \
 
 Using the provideded models we obtain the corresponding prediction files, resulting in the results in the following table:
 
+
+<table border="2">
+<tr><th align="center"> OK-VQA</th><th> AOK-VAL </th><th> AOK-TEST </th></tr>
+<tr><td>
+
+| MCAN | Prophet |
+|--|--|
+| 85.57\% | 85.95\% |
+</td><td>
+
+| MCAN | Prophet |
+|--|--|
+| 76.65\% | 81.14\% |
+</td><td>
+
+| MCAN | Prophet |
+|--|--|
+| 75.16\% | 79.55\% |
+</td></tr>
+</table>
+
+
 | Model | MCAN | Prophet |
 | :---: | :---: | :---: |
 | OK-VQA Accuracy | [53.0%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EVPAUDjTWX9Gn3GIqj7JwUoB5HMWwL3SRnNf18dSckJBOw?download=1) | [61.1%](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EUqH0N4fLVdPsLYJ48Wl_gsBneZzyGR23Tv5P9RskOBwNQ?download=1) |
