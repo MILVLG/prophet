@@ -7,6 +7,10 @@ This repository is the official implementation of the Prophet, a two stage frame
 
 ![prophet](misc/framework.png)
 
+## Updates
+April 28, 2023
+- Pre-trained and finetuned models of Prophet on the A-OKVQA dataset.
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
