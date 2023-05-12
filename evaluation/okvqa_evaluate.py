@@ -17,7 +17,10 @@ class OKEvaluater:
         # print(f'== Question file: {self.question_path}')
         self.result_file = []
         self.result_path = None
-    
+
+    def init(self):
+        self.result_file = []
+
     def prep_ans(self, answer):
         return prep_ans(answer)
     

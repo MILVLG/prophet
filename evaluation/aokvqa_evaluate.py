@@ -19,6 +19,9 @@ class AOKEvaluater:
         self.multiple_choice = False
         self.map_to_mc = True
     
+    def init(self):
+        self.result_file = []
+    
     def set_mode(self, multiple_choice=None, map_to_mc=None):
         if multiple_choice is not None:
             self.multiple_choice = multiple_choice

@@ -178,6 +178,7 @@ class Runner(object):
         )
 
         qid_idx = 0
+        self.evaluater.init()
 
         for step, input_tuple in enumerate(dataloader):
             print("\rEvaluation: [step %4d/%4d]" % (
