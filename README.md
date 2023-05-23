@@ -293,10 +293,11 @@ For the task of `aok_test`, you need to submit the result file to the [A-OKVQA L
 If you use this code in your research, please cite our paper:
 
 ```BibTex
-@article{shao2023prompting,
+@inproceedings{shao2023prompting,
   title={Prompting Large Language Models with Answer Heuristics for Knowledge-based Visual Question Answering},
   author={Shao, Zhenwei and Yu, Zhou and Wang, Meng and Yu, Jun},
-  journal={Computer Vision and Pattern Recognition (CVPR)},
+  booktitle={Computer Vision and Pattern Recognition (CVPR)},
+  pages={14974--14983},
   year={2023}
 }
 ```
