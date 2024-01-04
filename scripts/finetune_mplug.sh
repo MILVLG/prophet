@@ -29,11 +29,12 @@ while [[ $# -gt 0 ]]; do
 done
 
 TASK=${TASK:-ok} # task name, one of ['ok', 'aok_val', 'aok_test','text_val','text_test','science'], default 'ok'
-GPU=${GPU:-3} # GPU id(s) you want to use, default '0'
+GPU=${GPU:-1} # GPU id(s) you want to use, default '0'
 GPU_NUMS=${GPU_NUMS:-1}
 PRETRAINED_MODEL_PATH=${PRETRAINED_MODEL_PATH:-"ckpts/mcan_pt_okvqa.pkl"} # path to the pretrained model, default is the result from our experiments
 VERSION=${VERSION:-finetuning_okvqa} # version name, default 'finetuning_for_$TASK'
-RUN_MODE=${RUN_MODE:-finetune_mplug_test} #run mode, one of ['finetune_mplug','finetune_mplug_test'],default 'finetune'
+RUN_MODE=${RUN_MODE:-finetune_mplug} #run mode, one of ['finetune_mplug','finetune_mplug_test'],default 'finetune'
+MPLUG=${GPU_NUMS:-True}
 
 # run python script
 
@@ -46,8 +47,8 @@ elif [ $TASK == "text_test" ]; then
 else
   CONFIG=${CONFIG:-configs/mplug/finetune_mplug.yml}
 fi
-
-CUDA_VISIBLE_DEVICES=$GPU python -m torch.distributed.launch --nproc_per_node=$GPU_NUMS \
+#CUDA_VISIBLE_DEVICES=$GPU
+python -m torch.distributed.launch --nproc_per_node=$GPU_NUMS \
     --nnodes=1 --master_port=3224 \
     --use_env main_mplug.py \
     --cfg $CONFIG \
@@ -58,4 +59,5 @@ CUDA_VISIBLE_DEVICES=$GPU python -m torch.distributed.launch --nproc_per_node=$G
     --gpu $GPU \
     --seed 42 \
     --grad_accu 2\
-    --deepspeed_config configs/ds_config.json
+    --deepspeed_config configs/ds_config.json\
+    --mplug

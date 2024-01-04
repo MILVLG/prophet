@@ -37,6 +37,7 @@ def get_args():
     parser.add_argument('--dist_url', default='env://', help='url used to set up distributed training')
     parser.add_argument('--distributed', default=True, type=bool)
     parser.add_argument('--gpu_nums', dest='GPU_NUMS', help='gpu nums', type=int, default=1)
+    parser.add_argument('--mplug', dest='MPLUG', help='whether use mplug model', action='store_true')
     
     parser = deepspeed.add_config_arguments(parser)
     args = parser.parse_args()
