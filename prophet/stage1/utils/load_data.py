@@ -14,6 +14,10 @@ import glob, json, pickle, random
 import torch
 import torch.utils.data as Data
 from transformers import AutoTokenizer
+from torchvision import transforms
+from PIL import Image
+import os,re
+from .randaugment import RandomAugment
 
 from evaluation.ans_punct import prep_ans
 # from .transforms import _transform
@@ -172,3 +176,134 @@ class DataSet(Data.Dataset):
         ids = np.array(ids, np.int64)
 
         return ids
+    
+
+
+class Mplug_DataSet(Data.Dataset):
+    def __init__(self, __C, split_name_list,feat_test_files=None,feat=False):
+        self.__C = __C
+        self.feat=feat
+        print(f'Loading dataset for {self.__C.TASK}|{self.__C.RUN_MODE}({split_name_list})')
+        normalize = transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
+        self.ann = []
+        self.split = split_name_list
+        if self.split=='train':
+            self.transform = transforms.Compose([                        
+                transforms.RandomResizedCrop(__C.image_res,scale=(0.5, 1.0), interpolation=Image.BICUBIC),
+                transforms.RandomHorizontalFlip(),
+                RandomAugment(2,7,isPIL=True,augs=['Identity','AutoContrast','Equalize','Brightness','Sharpness','ShearX', 'ShearY', 'TranslateX', 'TranslateY', 'Rotate']),     
+                transforms.ToTensor(),
+                normalize,])
+            self.max_ques_words=30
+            for f in self.__C.MPLUG_TRAIN_PATH[self.__C.TASK]:
+                self.ann += json.load(open(f,'r')) 
+        elif self.split=='test':
+            self.transform = transforms.Compose([
+                transforms.Resize((__C.image_res,__C.image_res),interpolation=Image.BICUBIC),
+                transforms.ToTensor(),
+                normalize,])   
+            self.max_ques_words=50
+            if feat_test_files is not None:
+                for f in feat_test_files:
+                    self.ann += json.load(open(f,'r'))
+            else:
+                for f in self.__C.MPLUG_TEST_PATH[self.__C.TASK]:
+                    self.ann += json.load(open(f,'r')) 
+            self.answer_list = json.load(open(__C.answer_list_path,'r'))   
+        self.root=__C.data_root
+        self.add_ocr=__C.add_ocr
+        self.eos = '[SEP]'
+        self.add_object = __C.add_object
+        
+
+    def __getitem__(self, idx):
+        # get question in token ids, image in features,
+        # and answer in binary-label vector
+
+        #__C = self.__C
+        ann = self.ann[idx]
+        if self.__C.DATA_TAG=='text':
+            image_path = ann['image']
+        else:
+            image_path = os.path.join(self.root,ann['image'].replace('_img', ''))
+        #image_path = os.path.join(self.root,ann['image'].replace('_img', ''))
+        image = Image.open(image_path).convert('RGB')
+        image = self.transform(image)
+        question = ann['question']
+        
+        if self.__C.DATA_TAG=='science':
+            choices = ann['choices']
+            if len(choices) > 0:
+                question = question + " [SEP] "
+                for num,choice in enumerate(choices):
+                    question= question + "choice " + str(num) +' ' +choice +'. '
+            if 'hint' in ann:
+                question=question+' '+ann['hint']
+
+        if self.add_ocr and "ocr" in ann:
+            ocrs = ann['ocr']
+            ocr_tokens = []
+            poses = []
+            for ocr in ocrs:
+                pos, token = ocr
+                ocr_tokens.append(token)
+                poses.append(pos)
+            if len(ocr_tokens) > 0:
+                ocr_string = pre_question(" ".join(ocr_tokens), self.max_ques_words)
+                question = question + " [SEP] " + ocr_string
+        
+        if self.add_object and "object_label" in ann:
+            objects = ann["object_label"]
+            question = question + " [SEP] " + " ".join(objects.split("&&"))
+        if self.split == 'test':
+            if self.feat==True:
+                question_id = ann['question_id']
+                answer=ann['answer'][0] +self.eos 
+                return image, question, answer, question_id
+            else:
+                question_id = ann['question_id']            
+                return image, question, question_id
+        
+        elif self.split == 'train':
+            answer_weight = {}
+            for answer in ann['answer']:
+                if answer in answer_weight.keys():
+                    answer_weight[answer] += 1/len(ann['answer'])
+                else:
+                    answer_weight[answer] = 1/len(ann['answer'])
+
+            answers = list(answer_weight.keys())
+            weights = list(answer_weight.values())
+            answers = [answer+self.eos for answer in answers]
+                    
+            return image, question, answers, weights
+
+
+    def __len__(self):
+        return len(self.ann)
+
+
+def pre_question(question,max_ques_words):
+    question = re.sub(
+        r"([,.'!?\"()*#:;~])",
+        '',
+        question.lower(),
+    ).replace('-', ' ').replace('/', ' ')  
+    question = question.rstrip(' ')
+    
+    #truncate question
+    question_words = question.split(' ')
+    if len(question_words)>max_ques_words:
+        question = ' '.join(question_words[:max_ques_words])
+            
+    return question
+
+def vqa_collate_fn(batch):
+    image_list, question_list, answer_list, weight_list, n = [], [], [], [], []
+    for image, question, answer, weights in batch:
+        image_list.append(image)
+        question_list.append(question)
+        weight_list += weights       
+        answer_list += answer
+        n.append(len(answer))
+    return torch.stack(image_list,dim=0), question_list, answer_list, torch.Tensor(weight_list), n

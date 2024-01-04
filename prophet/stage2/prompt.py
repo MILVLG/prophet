@@ -27,6 +27,9 @@ class Runner:
         self.__C = __C
         self.evaluater = evaluater
         openai.api_key = __C.OPENAI_KEY
+        self.MC_choices=None
+        self.text_ocr=None
+        
     
     def gpt3_infer(self, prompt_text, _retry=0):
         # print(prompt_text)
@@ -70,14 +73,18 @@ class Runner:
         
         return response_txt, prob
     
-    def sample_make(self, ques, capt, cands, ans=None):
+    def sample_make(self, ques, capt, cands, ans=None,choices=None,ocr=None):
         line_prefix = self.__C.LINE_PREFIX
         cands = cands[:self.__C.K_CANDIDATES]
         prompt_text = line_prefix + f'Context: {capt}\n'
+        if ocr!=None:
+            prompt_text = line_prefix + f'OCR: {ocr}\n'
         prompt_text += line_prefix + f'Question: {ques}\n'
         cands_with_conf = [f'{cand["answer"]}({cand["confidence"]:.2f})' for cand in cands]
         cands = ', '.join(cands_with_conf)
         prompt_text += line_prefix + f'Candidates: {cands}\n'
+        if choices!=None:
+            prompt_text += line_prefix + f'Choices: {choices}\n'
         prompt_text += line_prefix + 'Answer:'
         if ans is not None:
             prompt_text += f' {ans}'
@@ -85,7 +92,10 @@ class Runner:
 
     def get_context(self, example_qids):
         # making context text for one testing input
-        prompt_text = self.__C.PROMPT_HEAD
+        if self.__C.DATA_TAG=='science':
+            prompt_text = self.__C.PROMPT_HEAD
+        else:
+            prompt_text = self.__C.PROMPT_HEAD_MC
         examples = []
         for key in example_qids:
             ques = self.trainset.get_question(key)
@@ -93,7 +103,15 @@ class Runner:
             cands = self.trainset.get_topk_candidates(key)
             gt_ans = self.trainset.get_most_answer(key)
             examples.append((ques, caption, cands, gt_ans))
-            prompt_text += self.sample_make(ques, caption, cands, ans=gt_ans)
+            if self.__C.DATA_TAG=='science':
+                choices= self.MC_choices[str(key)]["str"]
+                #choices=MC_choices[str(key)]
+                prompt_text += self.sample_make(ques, caption, cands, ans=gt_ans,choices=choices)
+            elif self.__C.DATA_TAG=='text':
+                ocr=self.text_ocr[str(key)]
+                prompt_text += self.sample_make(ques, caption, cands, ans=gt_ans,ocr=ocr)
+            else:
+                prompt_text += self.sample_make(ques, caption, cands, ans=gt_ans)
             prompt_text += '\n\n'
         return prompt_text
     
@@ -139,6 +157,10 @@ class Runner:
         N_inctx = self.__C.N_EXAMPLES
         
         print()
+        if self.__C.DATA_TAG=='science':
+            self.MC_choices = json.load(open('/home/ouyangxc/labs/mPLUG_fix_1/data_science/forgpt/MC_choices.json', 'r'))
+        elif self.__C.DATA_TAG=='text':
+            self.text_ocr=json.load(open('/home/ouyangxc/labs/mPLUG_fix_1/data_text/forgpt/ocr_line_10.json', 'r'))
 
         for qid in progress.track(self.valset.qid_to_data, description="Working...  "):
             if qid in self.cache:

@@ -28,7 +28,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-TASK=${TASK:-ok} # task name, one of ['ok', 'aok_val', 'aok_test'], default 'ok'
+TASK=${TASK:-ok} # task name, one of ['ok', 'aok_val', 'aok_test','text_val','text_test','science'], default 'ok'
 VERSION=${VERSION:-"prompt_okvqa"} # version name, default 'prompt_for_$TASK'
 EXAMPLES_PATH=${EXAMPLES_PATH:-"assets/answer_aware_examples_okvqa.json"} # path to the examples, default is the result from our experiments
 CANDIDATES_PATH=${CANDIDATES_PATH:-"assets/candidates_okvqa.json"} # path to the candidates, default is the result from our experiments

@@ -23,6 +23,14 @@ class PATH:
             'val2017': self.DATASET_ROOT + 'coco2017/val2017/',
             'test2017': self.DATASET_ROOT + 'coco2017/test2017/',
         }
+        self.MPLUG_IMAGE_DIR = {
+            'ok': self.DATASET_ROOT + 'coco2014',
+            'aok_val': self.DATASET_ROOT,
+            'aok_test': self.DATASET_ROOT,
+            'science': self.DATASET_ROOT + '/science/images',
+            'text_val': self.DATASET_ROOT + 'TextVQA/',
+            'text_test': self.DATASET_ROOT + 'TextVQA/',
+        }
 
         self.FEATS_DIR = {
             'train2014': self.DATASET_ROOT + 'coco2014_feats/train2014/',
@@ -53,6 +61,8 @@ class PATH:
             'oktest': self.DATASET_ROOT + 'okvqa/mscoco_val2014_annotations.json',
             'aoktrain': self.DATASET_ROOT + 'aokvqa/aokvqa_v1p0_train.json',
             'aokval': self.DATASET_ROOT + 'aokvqa/aokvqa_v1p0_val.json',
+            'science': self.DATASET_ROOT + 'mplug/sicenceqa/test_label2.json',
+            'text':self.DATASET_ROOT + 'mplug/textvqa/text_val_labels.json'
         }
 
         self.ANSWER_DICT_PATH = {
@@ -61,4 +71,22 @@ class PATH:
             'aok': self.ASSETS_ROOT + 'answer_dict_aokvqa.json',
         }
 
+        
+        self.MPLUG_TRAIN_PATH={
+            'ok': [self.DATASET_ROOT + 'mplug/okvqa/vqa_train_ama_ocr.json'],
+            'aok_val': [self.DATASET_ROOT + 'mplug/aokvqa/aok_train_ocr.json'],
+            'aok_test': [self.DATASET_ROOT + 'mplug/aokvqa/aok_train_ocr.json', self.DATASET_ROOT + 'mplug/okvqa/aok_val_ocr.json'],
+            'text_val': [self.DATASET_ROOT + 'mplug/textvqa/text_train.json',self.DATASET_ROOT + 'mplug/textvqa/ST_train_ocr.json',self.DATASET_ROOT + 'mplug/textvqa/ST_val_ocr.json'],
+            'text_test': [self.DATASET_ROOT + 'mplug/textvqa/text_train.json',self.DATASET_ROOT + 'mplug/textvqa/ST_train_ocr.json',self.DATASET_ROOT + 'mplug/textvqa/text_val.json',self.DATASET_ROOT + 'mplug/textvqa/ST_val_ocr.json'],
+            'science':[self.DATASET_ROOT + 'mplug/sicenceqa/train_ocr.json',self.DATASET_ROOT + 'mplug/sicenceqa/val_ocr.json'],
+        }
+        
+        self.MPLUG_TEST_PATH={
+            'ok': [self.DATASET_ROOT +'mplug/okvqa/vqa_val_ama_ocr.json'],
+            'aok_val': [self.DATASET_ROOT + 'mplug/aokvqa/aok_val_ocr.json'],
+            'aok_test': [self.DATASET_ROOT + 'mplug/aokvqa/aok_test_ocr.json'],
+            'text_val': [self.DATASET_ROOT + 'mplug/textvqa/text_val.json'],
+            'text_test': [self.DATASET_ROOT + 'mplug/textvqa/text_test.json'],
+            'science': [self.DATASET_ROOT + 'mplug/sicenceqa/test_ocr.json'],
+        }
 
