@@ -21,6 +21,8 @@ class AttrDict(dict):
         
 def create_two_optimizer(args, model, filter_bias_and_bn=True):
     no_decay = ["bias", "LayerNorm.weight"]
+    # print(args)
+    # quit()
     optimizer_grouped_parameters = [
         {
             "params": [p for n, p in model.named_parameters() if

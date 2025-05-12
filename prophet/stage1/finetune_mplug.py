@@ -71,12 +71,12 @@ class Runner(object):
             step_size = 100
             warmup_iterations = warmup_steps * step_size
             # Save log information
-            with open(self.__C.LOG_PATH, 'a+') as logfile:
-                logfile.write(
-                    f'nowTime: {datetime.now():%Y-%m-%d %H:%M:%S}\n'
-                )
+            # with open(self.__C.LOG_PATH, 'a+') as logfile:
+            #     logfile.write(
+            #         f'nowTime: {datetime.now():%Y-%m-%d %H:%M:%S}\n'
+            #     )
 
-            time_start = time.time()
+            # time_start = time.time()
             # Iteration
             for step, input_tuple in enumerate(dataloader):
                 iteration_loss = 0
@@ -91,10 +91,10 @@ class Runner(object):
                 answer_input = tokenizer(answer, padding='longest', return_tensors="pt").to(device)
 
                 loss = net(image, question_input, answer_input, train=True, alpha=alpha, k=n, weights=weights)
-                loss=loss/self.__C.GRAD_ACCU_STEPS
+                loss=loss#/self.__C.GRAD_ACCU_STEPS
 
                 net.backward(loss)
-                #net.step(epoch=epoch)
+                # net.step(epoch=epoch)
                 net.step()
                 loss_item = loss.item()
                 #iteration_loss += loss_item
@@ -117,8 +117,8 @@ class Runner(object):
                 ), end='\n')
                 del image,weights, question_input,answer_input, loss
 
-            time_end = time.time()
-            print('Finished in {}s'.format(int(time_end - time_start)))
+            # time_end = time.time()
+            # print('Finished in {}s'.format(int(time_end - time_start)))
 
             # Logging
             with open(self.__C.LOG_PATH, 'a+') as logfile:
@@ -168,8 +168,12 @@ class Runner(object):
                     ans = tokenizer.decode(topk_id[0]).replace("[SEP]", "").replace("[CLS]", "").replace("[PAD]", "").strip()
                     self.evaluater.add(ques_id, ans)
             else :
-                topk_ids, topk_probs, _, confi = net(image, question_input, answer_input, train=False, k=self.__C.k_test, mode='greedy')
-                for ques_id, topk_id, topk_prob, feat in zip(question_id, topk_ids, topk_probs, confi):
+                # topk_ids, topk_probs, _, confi = net(image, question_input, answer_input, train=False, k=self.__C.k_test, mode='greedy')
+                # for ques_id, topk_id, topk_prob, feat in zip(question_id, topk_ids, topk_probs, confi):
+                #     ans = tokenizer.decode(topk_id[0]).replace("[SEP]", "").replace("[CLS]", "").replace("[PAD]", "").strip()
+                #     self.evaluater.add(ques_id, ans)
+                topk_ids, topk_probs= net(image, question_input, answer_input, train=False, k=self.__C.k_test, mode='greedy')
+                for ques_id, topk_id, topk_prob in zip(question_id, topk_ids, topk_probs):
                     ans = tokenizer.decode(topk_id[0]).replace("[SEP]", "").replace("[CLS]", "").replace("[PAD]", "").strip()
                     self.evaluater.add(ques_id, ans)
 
@@ -180,28 +184,30 @@ class Runner(object):
                 self.evaluater.evaluate(logfile)
 
     def load_model(self):
-        seed = self.__C.SEED + get_rank()
-        # print(seed)
-        torch.manual_seed(seed)
-        np.random.seed(seed)
-        random.seed(seed)
+        # seed = self.__C.SEED + get_rank()
+        # # print(seed)
+        # torch.manual_seed(seed)
+        # np.random.seed(seed)
+        # random.seed(seed)
         cudnn.benchmark = True
         
-        tokenizer=BertTokenizer.from_pretrained('/data1/ouyangxc/bert_model/bert-base-uncased')
+        tokenizer=BertTokenizer.from_pretrained(self.__C.Bert_version_path)
         net = MPLUG(self.__C,tokenizer) #oy
         print('model done') #
 
         # Define the optimizer
-        if self.__C.RESUME:
-            raise NotImplementedError('Resume training is not needed as the finetuning is fast')
-        else:
-            arg_opt = AttrDict(self.__C.mplug_optimizer) #oy
-            optimizer = create_two_optimizer(arg_opt, net) #oy
-            #optim = get_optim(self.__C, net)
+        # if self.__C.RESUME:
+        #     raise NotImplementedError('Resume training is not needed as the finetuning is fast')
+        # else:
+        arg_opt = AttrDict(self.__C.mplug_optimizer) #oy
+        optimizer = create_two_optimizer(arg_opt, net) #oy
+        
+        #optim = get_optim(self.__C, net)
         self.start_epoch = 0
         arg_sche = AttrDict(self.__C.mplug_schedular)
         lr_scheduler, _ = create_scheduler(arg_sche, optimizer)
         print('lr_scheduler done')
+        
         ## load the pretrained model
         if self.__C.PRETRAINED_MODEL_PATH is not None:
             print(f'Loading pretrained model from {self.__C.PRETRAINED_MODEL_PATH}')
@@ -212,12 +218,14 @@ class Runner(object):
                 state_dict = checkpoint
             msg = net.load_state_dict(state_dict, strict=False)
             print('Finish loading.')
+            # print(msg)
+        
         if self.__C.deepspeed:
             net, optimizer, _, _ = deepspeed.initialize(
                 model=net,
                 optimizer=optimizer,
                 args=self.__C,
-                lr_scheduler=lr_scheduler,
+                lr_scheduler=None,
                 dist_init_required=True)
         print('deepspeed done')
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

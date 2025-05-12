@@ -26,9 +26,8 @@ from .utils.mplug_utils import AttrDict, create_two_optimizer,create_scheduler
 import multiprocessing as mp
 
 from configs.task_cfgs import Cfgs
-from .utils.load_data import CommonData, DataSet,Mplug_DataSet,vqa_collate_fn
-#from .model.mcan_for_finetune import MCANForFinetune
-from .utils.optim import get_optim_for_finetune as get_optim
+from .utils.load_data import CommonData, DataSet,Mplug_DataSet#,vqa_collate_fn
+
 import deepspeed
 
 class Runner(object):
@@ -81,7 +80,10 @@ class Runner(object):
                 
             answers_top1 = []
             for ques_id, topk_id, topk_prob in zip(question_id, topk_ids, topk_probs ):#存储topk答案
-                ques_id = int(ques_id.item()) #OK
+                try:
+                    ques_id = int(ques_id.item()) #OK
+                except:
+                    ques_id=ques_id
                 answers = []
                 for i in range(len(topk_id)):
                     ans = tokenizer.decode(topk_id[i]).replace("[SEP]", "").replace("[CLS]", "").replace("[PAD]", "").strip()
@@ -93,7 +95,10 @@ class Runner(object):
                 feat_answer_input = tokenizer(answers_top1, padding='longest', return_tensors="pt").to(device)
             feats = net(image, question_input, feat_answer_input, train=False, k=k, mode='feat').double().cpu().numpy()
             for ques_id, feat in zip(question_id, feats ):
-                ques_id = int(ques_id.item()) #OK
+                try:
+                    ques_id = int(ques_id.item()) #OK
+                except:
+                    ques_id=ques_id
                 feat_path=os.path.join(self.__C.ANSWER_LATENTS_DIR, f'{ques_id}.npy')
                 #temp_feat=copy.deepcopy(feat)
                 feat_list.append({"question_id":ques_id, "feature":feat})
@@ -175,10 +180,10 @@ class Runner(object):
         print(len(test_feat_results))
         self.similar_qids = {}
         print(f'\ncompute top-{E} similar examples for each testing input')
-        with mp.Pool() as pool:
-            results = pool.map(self.calculate_similarity, test_feat_results)
+        # with mp.Pool() as pool:
+        #     results = pool.map(self.calculate_similarity, test_feat_results)
         
-        """for qid,test_feat in test_feat_results.items():
+        for qid,test_feat in test_feat_results.items():
             test_feat = test_feat / np.linalg.norm(test_feat, axis=-1, keepdims=True)
             test_temp_dict = {}
             for train_qid, train_feat in train_feat_results.items():
@@ -187,7 +192,7 @@ class Runner(object):
                 sim_temp = (np.sum(np.mean(sim, axis=0)) + np.sum(np.mean(sim, axis=1))) / (sim.shape[0] + sim.shape[1])
                 test_temp_dict[train_qid] = sim_temp
             sorted_items = dict(sorted(test_temp_dict.items(), key=lambda x: x[1], reverse=True))
-            self.similar_qids[qid]= list(sorted_items.keys())[:E]    """   
+            self.similar_qids[qid]= list(sorted_items.keys())[:E]    
         # save similar qids
         print(len(self.similar_qids))
         with open(self.__C.EXAMPLE_FILE_PATH, 'w') as f:

@@ -61,4 +61,4 @@ CUDA_VISIBLE_DEVICES=$GPU python -m torch.distributed.launch --nproc_per_node=$G
     --gpu $GPU \
     --deepspeed_config configs/ds_config.json
 
-python prophet/stage1/utils/sim.py
+# python prophet/stage1/utils/sim.py

@@ -1,8 +1,8 @@
-name: prophet
+name: prophet_3
 channels:
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch
+  # - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch
   - pytorch
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  # - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
   - conda-forge
   - defaults
 dependencies:
@@ -18,15 +18,13 @@ dependencies:
     - einops==0.6.0
     - huggingface-hub==0.12.1
     - openai==0.18.0
-    - opencv-python==4.5.5.64
     - pillow==9.3.0
-    - pyyaml==6.0
     - sentence-transformers==2.2.2
     - sentencepiece==0.1.96
     - tokenizers==0.11.6
     - tqdm==4.63.0
     - transformers==4.18.0
-    - git+https://github.com/openai/CLIP.git
+    # - git+https://github.com/openai/CLIP.git
     - timm==0.4.9
     - ftfy==6.1.1
     - colorlog==6.7.0

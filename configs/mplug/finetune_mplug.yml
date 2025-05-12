@@ -17,34 +17,34 @@ FLAT_OUT_SIZE: 2048
 # Training
 BATCH_SIZE: 64
 EVAL_BATCH_SIZE: 8
-MAX_EPOCH: 10
+MAX_EPOCH: 8
 
 #mplug
 model: mplug
 BertTokenizer: bert-base-uncased
-Bert_version_path: '/data1/ouyangxc/bert_model/bert-base-uncased'
+Bert_version_path: 'ckpts/bert-base-uncased'
 mplug_optimizer: {opt: adamW, lr1: 3e-5, lr2: 1e-6, weight_decay: 0.02}
-mplug_schedular: {sched: cosine, lr: 3e-5, epochs: 15, min_lr: 1e-6, decay_rate: 1, warmup_lr: 1e-6, warmup_epochs: 4, cooldown_epochs: 0}
+mplug_schedular: {sched: cosine, lr: 3e-5, epochs: 8, min_lr: 1e-6, decay_rate: 1, warmup_lr: 1e-6, warmup_epochs: 4, cooldown_epochs: 0}
 deepspeed: True
 #train_file: ['/home/ouyangxc/labs/mPLUG_fix_1/data_ok/vqa_train_ama_ocr.json']
 #test_file: ['/home/ouyangxc/labs/mPLUG_fix_1/data_ok/vqa_val_ama_ocr.json']
 bert_config: 'configs/config_bert.json'
 vision_width: 1024
 use_checkpoint: True
-clip_path: "ckpts/mplug/ViT-L-14.tar"
+clip_path: "ckpts/ViT-L-14"
 image_res: 336
-text_encoder: '/data1/ouyangxc/bert_model/bert-base-uncased'
-text_decoder: '/data1/ouyangxc/bert_model/bert-base-uncased'
+text_encoder: 'ckpts/bert-base-uncased'
+text_decoder: 'ckpts/bert-base-uncased'
 distill: True
 beam_size: 20
-data_root: '/data1/ouyangxc/VQAv2/beit3/coco2017' #'/data1/ouyangxc/Science/science/images' #
+data_root: 'datasets' #'/data1/ouyangxc/VQAv2/beit3' #'/data1/ouyangxc/Science/science/images' #
 add_ocr: True
 add_object: True
-PRETRAINED_MODEL_PATH: /home/ouyangxc/labs/mPLUG_fix_1/vqav2.pth  #/data2/ouyangxc/mplug/OK_old1/7.pt/mp_rank_00_model_states.pt #
+PRETRAINED_MODEL_PATH: ckpts/mplug/vqav2.pth  #/data2/ouyangxc/mplug/OK_old1/7.pt/mp_rank_00_model_states.pt #
 warm_up: True
 alpha: 0.4
 #EVAL_path: /data2/ouyangxc/NEW_P/finetuning_okvqa/0.pt/mp_rank_00_model_states.pt #/data2/ouyangxc/mplug/OK_old1/7.pt/mp_rank_00_model_states.pt
-answer_list_path: /home/ouyangxc/labs/mPLUG_fix_1/data/ok_ocr_object/answer_list.json
+answer_list_path: assets/answer_list.json
 k_test: 128
 eos: '[SEP]'
 distributed: True

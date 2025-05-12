@@ -75,7 +75,7 @@ class PATH:
         self.MPLUG_TRAIN_PATH={
             'ok': [self.DATASET_ROOT + 'mplug/okvqa/vqa_train_ama_ocr.json'],
             'aok_val': [self.DATASET_ROOT + 'mplug/aokvqa/aok_train_ocr.json'],
-            'aok_test': [self.DATASET_ROOT + 'mplug/aokvqa/aok_train_ocr.json', self.DATASET_ROOT + 'mplug/okvqa/aok_val_ocr.json'],
+            'aok_test': [self.DATASET_ROOT + 'mplug/aokvqa/aok_train_ocr.json', self.DATASET_ROOT + 'mplug/aokvqa/aok_val_ocr.json'],
             'text_val': [self.DATASET_ROOT + 'mplug/textvqa/text_train.json',self.DATASET_ROOT + 'mplug/textvqa/ST_train_ocr.json',self.DATASET_ROOT + 'mplug/textvqa/ST_val_ocr.json'],
             'text_test': [self.DATASET_ROOT + 'mplug/textvqa/text_train.json',self.DATASET_ROOT + 'mplug/textvqa/ST_train_ocr.json',self.DATASET_ROOT + 'mplug/textvqa/text_val.json',self.DATASET_ROOT + 'mplug/textvqa/ST_val_ocr.json'],
             'science':[self.DATASET_ROOT + 'mplug/sicenceqa/train_ocr.json',self.DATASET_ROOT + 'mplug/sicenceqa/val_ocr.json'],
@@ -86,7 +86,6 @@ class PATH:
             'aok_val': [self.DATASET_ROOT + 'mplug/aokvqa/aok_val_ocr.json'],
             'aok_test': [self.DATASET_ROOT + 'mplug/aokvqa/aok_test_ocr.json'],
             'text_val': [self.DATASET_ROOT + 'mplug/textvqa/text_val.json'],
-            'text_test': [self.DATASET_ROOT + 'mplug/textvqa/text_test.json'],
             'science': [self.DATASET_ROOT + 'mplug/sicenceqa/test_ocr.json'],
         }
 

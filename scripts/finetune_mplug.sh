@@ -34,19 +34,9 @@ GPU_NUMS=${GPU_NUMS:-1}
 PRETRAINED_MODEL_PATH=${PRETRAINED_MODEL_PATH:-"ckpts/mcan_pt_okvqa.pkl"} # path to the pretrained model, default is the result from our experiments
 VERSION=${VERSION:-finetuning_okvqa} # version name, default 'finetuning_for_$TASK'
 RUN_MODE=${RUN_MODE:-finetune_mplug} #run mode, one of ['finetune_mplug','finetune_mplug_test'],default 'finetune'
-MPLUG=${GPU_NUMS:-True}
 
 # run python script
-
-if [ $TASK == "science" ]; then
-  CONFIG=${CONFIG:-configs/mplug/finetune_mplug.yml}
-elif [ $TASK == "text_val" ]; then
-  CONFIG=${CONFIG:-configs/mplug/finetune_mplug.yml}
-elif [ $TASK == "text_test" ]; then
-  CONFIG=${CONFIG:-configs/mplug/finetune_mplug.yml}
-else
-  CONFIG=${CONFIG:-configs/mplug/finetune_mplug.yml}
-fi
+CONFIG=${CONFIG:-configs/mplug/finetune_mplug.yml}
 #CUDA_VISIBLE_DEVICES=$GPU
 python -m torch.distributed.launch --nproc_per_node=$GPU_NUMS \
     --nnodes=1 --master_port=3224 \

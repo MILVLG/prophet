@@ -211,6 +211,8 @@ class Mplug_DataSet(Data.Dataset):
                     self.ann += json.load(open(f,'r')) 
             self.answer_list = json.load(open(__C.answer_list_path,'r'))   
         self.root=__C.data_root
+        # print('self.root',self.root)
+        # quit()
         self.add_ocr=__C.add_ocr
         self.eos = '[SEP]'
         self.add_object = __C.add_object

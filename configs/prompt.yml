@@ -8,3 +8,4 @@ LINE_PREFIX: "===\n"
 N_EXAMPLES: 20
 K_CANDIDATES: 10
 T_INFER: 5
+DATA_ROOT: 'datasets'
