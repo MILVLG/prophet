@@ -84,10 +84,10 @@ class Cfgs(PATH):
         # ----------------------
 
         self.TASK = getattr(args, 'TASK', 'ok')
-        assert self.TASK in ['ok', 'aok_val', 'aok_test','text_val','text_test','science']
+        assert self.TASK in ['ok', 'aok_val', 'aok_test','text_val','text_test','science_test']
 
         self.RUN_MODE = getattr(args, 'RUN_MODE', 'finetune')
-        assert self.RUN_MODE in ['pretrain', 'finetune', 'finetune_test', 'heuristics', 'heuristics_mplug','prompt','finetune_mplug','finetune_mplug_test']
+        assert self.RUN_MODE in ['pretrain', 'finetune', 'finetune_test', 'heuristics', 'heuristics_mplug','prompt','finetune_mplug','finetune_mplug_test','cot_gen']
 
         if self.RUN_MODE == 'pretrain':
             self.DATA_TAG = 'v2'  # used to config answer dict

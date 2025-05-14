@@ -22,25 +22,35 @@ while [[ $# -gt 0 ]]; do
     --cot_path)
       COT_PATH="$2"
       shift 2;;
+    --mc_path)
+      MC_PATH="$2"
+      shift 2;;
+      --ocr_path)
+      OCR_PATH="$2"
+      shift 2;;
     *)
       echo "Unknown argument: $1"
       exit 1;;
   esac
 done
 
-TASK=${TASK:-ok} # task name, one of ['ok', 'aok_val', 'aok_test','text_val','text_test','science'], default 'ok'
+TASK=${TASK:-ok} # task name, one of ['ok', 'aok_val', 'aok_test','text_val','text_test','science_test'], default 'ok'
 VERSION=${VERSION:-"prompt_okvqa"} # version name, default 'prompt_for_$TASK'
 EXAMPLES_PATH=${EXAMPLES_PATH:-"assets/answer_aware_examples_okvqa.json"} # path to the examples, default is the result from our experiments
 CANDIDATES_PATH=${CANDIDATES_PATH:-"assets/candidates_okvqa.json"} # path to the candidates, default is the result from our experiments
 CAPTIONS_PATH=${CAPTIONS_PATH:-"assets/captions_okvqa.json"} # path to the captions, default is the result from our experiments
 COT_PATH=${COT_PATH:-""} # path to the captions
+MC_PATH=${MC_PATH:-""} # path to the choices
+OCR_PATH=${OCR_PATH:-""} # path to the choices
 
 # CUDA_VISIBLE_DEVICES=$GPU \
-python main.py \
+python main_mplug.py \
     --task $TASK --run_mode prompt \
     --version $VERSION \
     --cfg configs/prompt.yml \
     --examples_path $EXAMPLES_PATH \
     --candidates_path $CANDIDATES_PATH \
     --captions_path $CAPTIONS_PATH \
-    --cot_path $COT_PATH
+    --cot_path $COT_PATH \
+    --mc_path $MC_PATH \
+    --ocr_path $OCR_PATH 

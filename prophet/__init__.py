@@ -44,6 +44,8 @@ def get_runner(__C, evaluater):
         from .stage1.heuristics import Runner
     elif __C.RUN_MODE == 'heuristics_mplug':
         from .stage1.heuristics_mplug import Runner
+    elif __C.RUN_MODE == 'cot_gen':
+        from .stage1.cot_gen import Runner
     elif __C.RUN_MODE == 'prompt':
         from .stage2.prompt import Runner
     else:

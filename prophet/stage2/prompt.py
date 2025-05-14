@@ -181,12 +181,12 @@ class Runner:
         test_data = json.load(open(self.__C.MPLUG_TEST_PATH[self.__C.TASK][0],'r'))
         self.image_dict={str(x['question_id']):x['image'] for x in test_data}
         self.cot_dict=json.load(open(self.__C.CoT_PATH))
-        if self.__C.DATA_TAG=='science':
-            self.MC_choices = json.load(open('/home/ouyangxc/labs/mPLUG_fix_1/data_science/forgpt/MC_choices.json', 'r'))
-        elif self.__C.DATA_TAG=='aok_mc':
-            self.MC_choices = json.load(open('/home/ouyangxc/labs/mPLUG_fix_1/data_science/forgpt/MC_choices.json', 'r'))
-        elif self.__C.DATA_TAG=='text':
-            self.text_ocr=json.load(open('/home/ouyangxc/labs/mPLUG_fix_1/data_text/forgpt/ocr_line_10.json', 'r'))
+        if self.__C.MC_PATH:
+            self.MC_choices = json.load(open(self.__C.MC_PATH, 'r'))
+        if self.__C.DATA_TAG=='text':
+            # self.text_ocr=json.load(open('/data2/ouyangxc/temp/lixiang/openai/textvqa/mplug/ocr_line_10.json', 'r'))
+            self.text_ocr=json.load(open(self.__C.OCR_PATH, 'r'))
+            
 
         for qid in progress.track(self.valset.qid_to_data, description="Working...  "):
             if qid in self.cache:

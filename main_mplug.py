@@ -28,7 +28,7 @@ def get_args():
     parser.add_argument('--examples_path', dest='EXAMPLES_PATH', help='answer-aware example file path, default: "assets/answer_aware_examples_for_ok.json"', type=str, default=None)
     parser.add_argument('--candidates_path', dest='CANDIDATES_PATH', help='candidates file path, default: "assets/candidates_for_ok.json"', type=str, default=None)
     parser.add_argument('--captions_path', dest='CAPTIONS_PATH', help='captions file path, default: "assets/captions_for_ok.json"', type=str, default=None)
-    parser.add_argument('--openai_key', dest='OPENAI_KEY', help='openai api key', type=str, default=None)
+    # parser.add_argument('--openai_key', dest='OPENAI_KEY', help='openai api key', type=str, default=None)
     #new mplug argument
     parser.add_argument('--min_length', default=1, type=int)
     parser.add_argument('--max_length', default=20, type=int) #10
@@ -38,6 +38,9 @@ def get_args():
     parser.add_argument('--distributed', default=True, type=bool)
     parser.add_argument('--gpu_nums', dest='GPU_NUMS', help='gpu nums', type=int, default=1)
     parser.add_argument('--mplug', dest='MPLUG', help='whether use mplug model', action='store_true')
+    parser.add_argument('--cot_path', dest='CoT_PATH', help='openai api key', type=str, default=None)
+    parser.add_argument('--mc_path', dest='MC_PATH', help='for aokvqa and scienceqa task', required=False,type=str, default='',nargs='?',)
+    parser.add_argument('--ocr_path', dest='OCR_PATH', help='only for textvqa', type=str, required=False,default='',nargs='?',)
     
     parser = deepspeed.add_config_arguments(parser)
     args = parser.parse_args()

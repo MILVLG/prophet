@@ -31,6 +31,18 @@ TASK_TO_SPLIT = {
             'eval_split': ['oktest'],
         }
     },
+    'science_test': {
+        'finetune': {
+            'train_split': ['sciencetrain','scienceval'],
+            'eval_split': ['sciencetest'],
+        }
+    },
+    'text_val': {
+        'finetune': {
+            'train_split': ['texttrain'],
+            'eval_split': ['textval'],
+        }
+    },
     'aok_val': {
         'pretrain': {
             'train_split': ['v2train'],
@@ -38,6 +50,9 @@ TASK_TO_SPLIT = {
         'finetune': {
             'train_split': ['aoktrain'],
             'eval_split': ['aokval'],
+        },
+        'cot_gen': {
+            'train_split': ['aoktrain','aokval'],
         }
     },
     'aok_test': {
