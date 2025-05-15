@@ -3,17 +3,22 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/prompting-large-language-models-with-answer/visual-question-answering-on-a-okvqa)](https://paperswithcode.com/sota/visual-question-answering-on-a-okvqa?p=prompting-large-language-models-with-answer)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/prompting-large-language-models-with-answer/visual-question-answering-on-ok-vqa)](https://paperswithcode.com/sota/visual-question-answering-on-ok-vqa?p=prompting-large-language-models-with-answer)
 
-This repository is the official implementation of the Prophet, a two stage framework designed to prompt GPT-3 with answer heuristics for knowledge-based VQA. In stage one, we train a vanilla VQA model on a specific knowledge-based VQA dataset and extract two types of complementary answer heuristics from the model: answer candidates and answer-aware examples. In stage two, answer heuristics are used to prompt GPT-3 to generate better answers. Prophet significantly outperforms existing state-of-the-art methods  on two datasets, delivering 61.1% on OK-VQA and 55.7% on A-OKVQA. Please refer to our [paper](https://arxiv.org/pdf/2303.01903.pdf) for details.
+This repository is the official implementation of the Prophet++, a two stage framework designed to prompt GPT-4o with answer heuristics for knowledge-based VQA. In stage one, we train a vanilla VQA model on a specific knowledge-based VQA dataset and extract two types of complementary answer heuristics from the model: answer candidates and answer-aware examples. In stage two, answer heuristics are used to prompt GPT-4o to generate better answers. Prophet++ significantly outperforms existing state-of-the-art methods  on four datasets, delivering 65.7% on OK-VQA, 68.0% on A-OKVQA, 61.8% on TextVQA and 90.5% on ScienceQA. Please refer to our [paper](https://arxiv.org/pdf/2303.01903.pdf) for details.
 
 ![prophet](misc/framework.png)
 
 ## Updates
+January 15, 2025
+- Add training and testing codes of the Prophet++ framework on A-OKVQA, OKVQA, Textvqa and ScienceQA.
+
 April 28, 2023
 - Add pretrained and finetuned models on A-OKVOA.
 
 March 10, 2023
 - Training and testing codes of the two-stages Prophet framework.
 - Pretrained and finetuned models on OK-VOA.
+
+
 
 ## Table of Contents
 
@@ -53,13 +58,9 @@ $ conda activate prophet
 
 Before running the code, prepare two folders: `datasets` and `assets`. The `datasets` folder contains all the datasets and features used in this project, and the `assets` folder contains the pre-computed resources and other intermediate files (you can use them to skip some early experiment steps and save time).
 
-First, download the [datasets](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/Ebzd7EANzHVHnh3FvYvCJ7kBkJf56iT1Obe5L2PZAzgM2g?download=1) and [assets](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/Ec5NPIswAxlEqi74qwGjIf0BKInF0O6nwW5dtn4h3GOUsQ?download=1). Then put the `datasets` and `assets` folder in the root directory of this project. Download MSCOCO 2014 and 2017 images from [here](https://cocodataset.org/#download) (you can skip MSCOCO 2017 if you only experiments on OK-VQA) and put them in the `datasets` folder. Run the following command to extract the features of the images:
+First, download the [datasets](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/Ebzd7EANzHVHnh3FvYvCJ7kBkJf56iT1Obe5L2PZAzgM2g?download=1) and [assets](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/Ec5NPIswAxlEqi74qwGjIf0BKInF0O6nwW5dtn4h3GOUsQ?download=1). Then put the `datasets` and `assets` folder in the root directory of this project. Download MSCOCO 2014 and 2017 images from [here](https://cocodataset.org/#download)(you can skip MSCOCO 2017 if you only experiments on OK-VQA) and put them in the `datasets` folder.You can download [TextVQA](https://textvqa.org/dataset/)and [ScienQA](https://scienceqa.github.io/#download) as need. 
 
-``` shell
-$ bash scripts/extract_img_feats.sh
-```
-
-After that, the `datasets` and `assets` folder will have the following structure:
+After that, the `datasets` and `assets` folder should have the following structure:
 
 <details>
 <summary>Click to expand</summary>
@@ -73,22 +74,49 @@ datasets
 ├── coco2014
 │   ├── train2014
 │   └── val2014
-├── coco2014_feats
-│   ├── train2014
-│   └── val2014
 ├── coco2017
 │   ├── test2017
 │   ├── train2017
 │   └── val2017
-├── coco2017_feats
-│   ├── test2017
-│   ├── train2017
-│   └── val2017
+├── mplug
+│   ├── aokvqa
+│   │   ├── aok_test.json
+│   │   ├── aok_train.json
+│   │   ├── text_val_labels.json
+│   │   └── text_val.json
+│   ├── okvqa
+│   │   ├── ok_train.json
+│   │   ├── ok_val_labels.json
+│   │   └── ok_val.json
+│   ├── scienceqa
+│   │   ├── sci_train.json
+│   │   ├── sci_val_labels.json
+│   │   └── sci_val.json
+│   └── textvqa
+│       ├── text_test.json
+│       ├── text_train.json
+│       ├── text_val_labels.json
+│       └── text_val.json
 ├── okvqa
 │   ├── mscoco_train2014_annotations.json
 │   ├── mscoco_val2014_annotations.json
 │   ├── OpenEnded_mscoco_train2014_questions.json
 │   └── OpenEnded_mscoco_val2014_questions.json
+├── science
+│   ├── images
+│   ├── captions.json
+│   ├── pid_splits.json
+│   └── problems.json
+├── stvqa
+│   ├── images
+│   ├── captions.json
+│   ├── pid_splits.json
+│   └── problems.json
+├── textvqa
+│   ├── test_images
+│   ├── train_images
+│   ├── pid_splits.json
+│   └── problems.json
 └── vqav2
     ├── v2_mscoco_train2014_annotations.json
     ├── v2_mscoco_val2014_annotations.json
