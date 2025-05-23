@@ -33,8 +33,8 @@ class Runner:
         self.evaluater = evaluater
         # openai.api_key = __C.OPENAI_KEY
         self.client = OpenAI(
-            base_url='https://api.key77qiqi.cn/v1',
-            api_key='sk-qoc1zRByuvCzlrZFgBaA6wqRwkUbyHQUUXnIKXgNXnbIGOXj'
+            base_url='x',
+            api_key='x'
             )#Setting by yourself
         self.MC_choices=None
         self.text_ocr=None

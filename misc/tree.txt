@@ -1,5 +1,25 @@
 prophet
 ├── assets
+│   ├──mplug
+│   │   ├── aokvqa
+│   │   │   ├── aok_test.json
+│   │   │   ├── aok_train.json
+│   │   │   ├── text_val_labels.json
+│   │   │   └── text_val.json
+│   │   ├── okvqa
+│   │   │   ├── ok_train.json
+│   │   │   ├── ok_val_labels.json
+│   │   │   └── ok_val.json
+│   │   ├── scienceqa
+│   │   │   ├── sci_train.json
+│   │   │   ├── sci_val_labels.json
+│   │   │   └── sci_val.json
+│   │   └── textvqa
+│   │       ├── text_test.json
+│   │       ├── text_train.json
+│   │       ├── text_val_labels.json
+│   │       └── text_val.json
+│   │
 │   ├── answer_aware_examples_okvqa.json
 │   ├── answer_dict_aokvqa.json
 │   ├── answer_dict_okvqa.json
@@ -12,12 +32,15 @@ prophet
 │   ├── examples_aokvqa_test.json.json
 │   └── examples_aokvqa_val.json.json
 ├── ckpts
-│   ├── mcan_ft_aokvqa_test.pkl
-│   ├── mcan_ft_aokvqa_val.pkl
-│   ├── mcan_ft_okvqa.pkl
-│   ├── mcan_pt_aokvqa_test.pkl
-│   └── mcan_pt_aokvqa_val.pkl
-│   ├── mcan_pt_okvqa.pkl
+│   ├──bert-base-uncased
+│   ├──mplug
+│   │   └──vqav2.pth
+│   ├── aok_test.pt
+│   ├── aok_val.pt
+│   ├── ok.pt
+│   ├── scienceqa.pt
+│   ├── textqa_val.pt
+│   └──ViT-L-14
 ├── configs
 │   ├── finetune.yml
 │   ├── path_cfgs.py

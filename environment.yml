@@ -1,4 +1,4 @@
-name: prophet_3
+name: prophet_2
 channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch
   - pytorch

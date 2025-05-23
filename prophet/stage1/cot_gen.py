@@ -20,8 +20,8 @@ class Runner(object):
     def __init__(self, __C, *args, **kwargs):
         self.__C = __C
         self.client=OpenAI(
-            base_url='https://api.key77qiqi.cn/v1',
-            api_key='sk-qoc1zRByuvCzlrZFgBaA6wqRwkUbyHQUUXnIKXgNXnbIGOXj'
+            base_url='x',
+            api_key='x'
             )
         #self.net = Non
     
