@@ -8,11 +8,13 @@ This repository is the official implementation of the Prophet++, a two stage fra
 ![prophet](misc/framework.png)
 
 ## Updates
+### Prophet++
 January 15, 2025
-- Add training and testing codes of the Prophet++ framework on A-OKVQA, OKVQA, Textvqa and ScienceQA.
+- Training and testing codes of the Prophet++ framework on A-OKVQA, OKVQA, Textvqa and ScienceQA. [Code base](https://github.com/bruceisme/prophet/tree/mplug)
 
+### Prophet
 April 28, 2023
-- Add pretrained and finetuned models on A-OKVOA.
+- Add pretrained and finetuned models on A-OKVOA. [Code base](https://github.com/bruceisme/prophet/tree/main)
 
 March 10, 2023
 - Training and testing codes of the two-stages Prophet framework.
@@ -286,7 +288,7 @@ $ bash scripts/prompt_mplug.sh \
 ```
 The result file will be stored as `result.json` in `outputs/results/{your_version_name}` directory.
 
-### 4. scienceQA (test)
+### 4. ScienceQA (test)
 
 #### **Stage one**
 For task of `science_test`, run finetuning step with commands:
@@ -389,7 +391,7 @@ Using the corresponding result files and evaluation script above, we obtain the 
 
 
 <table border="2">
-<tr><th> OK-VQA</th><th> A-OKVQA (val) </th><th> A-OKVQA (test) </th><th> scienceQA (test)</th><th> TextVQA (test)</th></tr>
+<tr><th> OK-VQA</th><th> A-OKVQA (val) </th><th> A-OKVQA (test) </th><th> ScienceQA (test)</th><th> TextVQA (test)</th></tr>
 <tr><td>
 
 | mPLUG | Prophet++ |
@@ -426,6 +428,14 @@ For the task of `aok_test`, you need to submit the result file to the [A-OKVQA L
 If you use this code in your research, please cite our paper:
 
 ```BibTex
+@inproceedings{shao2023prompting,
+  title={Prompting Large Language Models with Answer Heuristics for Knowledge-based Visual Question Answering},
+  author={Shao, Zhenwei and Yu, Zhou and Wang, Meng and Yu, Jun},
+  booktitle={Computer Vision and Pattern Recognition (CVPR)},
+  pages={14974--14983},
+  year={2023}
+}
+
 @article{yu2025prophet,
   title={Prophet: Prompting large language models with complementary answer heuristics for knowledge-based visual question answering},
   author={Yu, Zhou and Ouyang, Xuecheng and Shao, Zhenwei and Wang, Meng and Yu, Jun},
