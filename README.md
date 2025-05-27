@@ -56,7 +56,7 @@ This command will create a new environment named `prophet_2` with all the requir
 $ conda activate prophet_2
 ```
 
-### Data Preparation
+### Preparation
 
 Before running the code, prepare two folders: `datasets` and `assets`. The `datasets` folder contains all the datasets and features used in this project, and the `assets` folder contains the pre-computed resources and other intermediate files (you can use them to skip some early experiment steps and save time).
 
@@ -130,6 +130,7 @@ datasets
     └── vg_questions.json
 ```
 </details>
+Then, you should download and put [ViT-L-14](https://huggingface.co/sentence-transformers/clip-ViT-L-14) and [bert-base-uncased](https://huggingface.co/google-bert/bert-base-uncased) in `ckpts`
 
 We've also provided a tree structure of the entire project in [misc/tree.txt](misc/tree.txt).
 
@@ -149,6 +150,8 @@ Before running any script, you can also update the configuration files (`*.yml`)
 ### 1. OK-VQA
 
 Take OK-VQA for example, Propht++ consists of two phases, stage one for training a vanilla VQA model and extracting answer heuristics, and stage two for prompting GPT-3 with answer heuristics.
+
+
 
 #### **Stage one**
 

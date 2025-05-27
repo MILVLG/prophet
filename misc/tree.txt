@@ -32,15 +32,14 @@ prophet
 │   ├── examples_aokvqa_test.json.json
 │   └── examples_aokvqa_val.json.json
 ├── ckpts
-│   ├──bert-base-uncased
-│   ├──mplug
-│   │   └──vqav2.pth
+│   ├── bert-base-uncased
+│   ├── vqav2.pth
 │   ├── aok_test.pt
 │   ├── aok_val.pt
 │   ├── ok.pt
 │   ├── scienceqa.pt
 │   ├── textqa_val.pt
-│   └──ViT-L-14
+│   └── ViT-L-14
 ├── configs
 │   ├── finetune.yml
 │   ├── path_cfgs.py
