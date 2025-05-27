@@ -58,7 +58,7 @@ $ conda activate prophet_2
 
 Before running the code, prepare two folders: `datasets` and `assets`. The `datasets` folder contains all the datasets and features used in this project, and the `assets` folder contains the pre-computed resources and other intermediate files (you can use them to skip some early experiment steps and save time).
 
-First, download the [datasets](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/Ebzd7EANzHVHnh3FvYvCJ7kBkJf56iT1Obe5L2PZAzgM2g?download=1), [assets](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/Ec5NPIswAxlEqi74qwGjIf0BKInF0O6nwW5dtn4h3GOUsQ?download=1) and [mplug](). Then put the `datasets` and `assets` folder in the root directory of this project and put `mplug` in `datasets` directory. Download MSCOCO 2014 and 2017 images from [here](https://cocodataset.org/#download)(you can skip MSCOCO 2017 if you only experiments on OK-VQA) and put them in the `datasets` folder. You can download [TextVQA](https://textvqa.org/dataset/)and [ScienQA](https://scienceqa.github.io/#download) as need. 
+First, download the [datasets](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/Ebzd7EANzHVHnh3FvYvCJ7kBkJf56iT1Obe5L2PZAzgM2g?download=1), [assets](https://pan.baidu.com/s/1MqWQng358Agy89elD8iCiw?pwd=5tnv) and [mplug](https://pan.baidu.com/s/1JOrfCPd54tIu1VHmHokwJg?pwd=bbpu). Then put the `datasets` and `assets` folder in the root directory of this project and put `mplug` in `datasets` directory. Download MSCOCO 2014 and 2017 images from [here](https://cocodataset.org/#download)(you can skip MSCOCO 2017 if you only experiments on OK-VQA) and put them in the `datasets` folder. You can download [TextVQA](https://textvqa.org/dataset/)and [ScienQA](https://scienceqa.github.io/#download) as need. 
 
 After that, the `datasets` and `assets` folder should have the following structure:
 
@@ -150,7 +150,7 @@ Take OK-VQA for example, Propht++ consists of two phases, stage one for training
 
 #### **Stage one**
 
-At this stage, we train an mPLUG model through finetuning on target dataset. We've provided a pretrained mPLUG model [here](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EcdTatraOqRJnZXBDXfr7QQBPtn8QYCa2m3Pvq0LlEml9Q?download=1)(需要替换).Multiple GPUs are supported by setting `--gpu 0,1,2,3` (for example). Run finetuning step with commands:
+At this stage, we train an mPLUG model through finetuning on target dataset. We've provided a pretrained mPLUG model [here](https://pan.baidu.com/s/1JG1p7ta0Js9NakfqCdHRvQ?pwd=duh1).Multiple GPUs are supported by setting `--gpu 0,1,2,3` (for example). Run finetuning step with commands:
 
 ```shell
 $ bash scripts/finetune_mPLUG.sh \
@@ -158,7 +158,7 @@ $ bash scripts/finetune_mPLUG.sh \
     --pretrained_model outputs/okvqa_pretrain_1/ckpts/epoch_13.pkl
 ```
 
-All epoch checkpoints are saved in `outputs/ckpts/{your_version_name}`. The final model will be saved as `mp_rank_00_model_states.pt`. We've also provided a finetuned model for OK-VQA [here](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/ESUb093PgyZFtLnU_RIYJQsBN_PU0jJdu-eFUb1-4T4mIQ?download=1)(需要修改). You may pick one to generate answer heuristics by run following command:
+All epoch checkpoints are saved in `outputs/ckpts/{your_version_name}`. The final model will be saved as `mp_rank_00_model_states.pt`. We've also provided a finetuned model for OK-VQA [here](https://pan.baidu.com/s/1AIG8Z1QvQWQ5R0T9-vN3yA?pwd=ya49). You may pick one to generate answer heuristics by run following command:
 
 ```shell
 $ bash scripts/heuristics_gen_mplug.sh \
@@ -208,7 +208,7 @@ $ bash scripts/finetune_mplug.sh \
     --pretrained_model ckpts/mplug/vqav2.pth
 ```
 
-All epoch checkpoints are saved in `outputs/ckpts/{your_version_name}`. The final model will be saved as `mp_rank_00_model_states.pt`. We've also provided a finetuned model for `aok_val` [here](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EQXIIjAIiJJFrOpobVhyH9oBBeBAY-VttHqfS91qPOKlJw?download=1). You may pick one to generate answer heuristics by run following command:
+All epoch checkpoints are saved in `outputs/ckpts/{your_version_name}`. The final model will be saved as `mp_rank_00_model_states.pt`. We've also provided a finetuned model for `aok_val` [here](https://pan.baidu.com/s/1JgwOF0W-tHMnbjCrfwjxpA?pwd=jgt3). You may pick one to generate answer heuristics by run following command:
 
 ```shell
 $ bash scripts/heuristics_gen_mplug.sh \
@@ -298,7 +298,7 @@ $ bash scripts/finetune_mplug.sh \
     --pretrained_model ckpts/mplug/vqav2.pth
 ```
 
-All epoch checkpoints are saved in `outputs/ckptss/{your_version_name}`.We've also provided a finetuned model for `science_test` [here](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EQ6gvWbv9VhHrhh0D08G79kBk6JEA_eqXEt5ULgueCf1tA?download=1). You may pick one to generate answer heuristics by run following command:
+All epoch checkpoints are saved in `outputs/ckptss/{your_version_name}`.We've also provided a finetuned model for `science_test` [here](https://pan.baidu.com/s/1MelVJ5GdNAl367BMsQMvxw?pwd=ayva). You may pick one to generate answer heuristics by run following command:
 
 ```shell
 $ bash scripts/heuristics_gen_mplug.sh \
@@ -332,9 +332,9 @@ The result file will be stored as `result.json` in `outputs/results/{your_versio
 
 ### 5. TextVQA (val)
 
-For task of `text_val`, run pretraining step with commands:
+
 #### **Stage one**
-We've provided a pretrained model for `text_val` [here](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EWSBB1OrjIlBoPdTMso6RFABNQKYKBWo1iU4l0w2NVDvuQ?download=1). Then, run finetuning step with commands:
+For task of `text_val`, run pretraining step with commands:
 
 ```shell
 $ bash scripts/finetune_mplug.sh \
@@ -342,7 +342,7 @@ $ bash scripts/finetune_mplug.sh \
     --pretrained_model outputs/text_val_pretrain_1/ckpts/epoch_13.pkl
 ```
 
-All epoch checkpoints are saved in `outputs/ckptss/{your_version_name}`.We've also provided a finetuned model for `text_val` [here](https://awma1-my.sharepoint.com/:u:/g/personal/yuz_l0_tn/EQ6gvWbv9VhHrhh0D08G79kBk6JEA_eqXEt5ULgueCf1tA?download=1). You may pick one to generate answer heuristics by run following command:
+All epoch checkpoints are saved in `outputs/ckptss/{your_version_name}`.We've also provided a finetuned model for `text_val` [here](https://pan.baidu.com/s/11Qi8fTtZdY5gW3hWhz0XeA?pwd=paku). You may pick one to generate answer heuristics by run following command:
 
 ```shell
 $ bash scripts/heuristics_gen_mplug.sh \
@@ -426,12 +426,12 @@ For the task of `aok_test`, you need to submit the result file to the [A-OKVQA L
 If you use this code in your research, please cite our paper:
 
 ```BibTex
-@inproceedings{shao2023prompting,
-  title={Prompting Large Language Models with Answer Heuristics for Knowledge-based Visual Question Answering},
-  author={Shao, Zhenwei and Yu, Zhou and Wang, Meng and Yu, Jun},
-  booktitle={Computer Vision and Pattern Recognition (CVPR)},
-  pages={14974--14983},
-  year={2023}
+@article{yu2025prophet,
+  title={Prophet: Prompting large language models with complementary answer heuristics for knowledge-based visual question answering},
+  author={Yu, Zhou and Ouyang, Xuecheng and Shao, Zhenwei and Wang, Meng and Yu, Jun},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2025},
+  publisher={IEEE}
 }
 ```
 
