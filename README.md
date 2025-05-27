@@ -1,4 +1,4 @@
-# Prophet
+# Prophet++
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/prompting-large-language-models-with-answer/visual-question-answering-on-a-okvqa)](https://paperswithcode.com/sota/visual-question-answering-on-a-okvqa?p=prompting-large-language-models-with-answer)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/prompting-large-language-models-with-answer/visual-question-answering-on-ok-vqa)](https://paperswithcode.com/sota/visual-question-answering-on-ok-vqa?p=prompting-large-language-models-with-answer)
@@ -399,22 +399,22 @@ Using the corresponding result files and evaluation script above, we obtain the 
 | 53.0% | 65.7% |
 </td><td>
 
-| mPLUG | Prophet |
+| mPLUG | Prophet++ |
 |:--:|:--:|
 | 59.1%|68.3%|
 </td><td>
 
-| mPLUG | Prophet |
+| mPLUG | Prophet++ |
 |:--:|:--:|
 | 55.7 |68.0%|
 </td><td>
 
-| mPLUG | Prophet |
+| mPLUG | Prophet++ |
 |:--:|:--:|
 | 77.0%|90.5%|
 </td><td>
 
-| mPLUG | Prophet |
+| mPLUG | Prophet++ |
 |:--:|:--:|
 | 53.5% | 61.8% |
 </td></tr>
