@@ -1,5 +1,5 @@
 **/__pycache__/
-datasets/*/
+datasets/*
 !datasets/.gitkeep
 assets/*
 !assets/.gitkeep

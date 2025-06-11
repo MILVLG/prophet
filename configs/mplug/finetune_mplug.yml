@@ -1,0 +1,51 @@
+# Network
+IMG_RESOLUTION: 512
+IMG_FEAT_GRID: 16
+IMG_FEAT_SIZE: 4096
+BERT_VERSION: bert-large-uncased
+MAX_TOKEN: 32
+LANG_FEAT_SIZE: 1024
+LAYER: 6
+HIDDEN_SIZE: 1024
+FF_SIZE: 4096
+MULTI_HEAD: 8
+DROPOUT_R: 0.1
+FLAT_MLP_SIZE: 1024
+FLAT_GLIMPSES: 1
+FLAT_OUT_SIZE: 2048
+
+# Training
+BATCH_SIZE: 64
+EVAL_BATCH_SIZE: 8
+MAX_EPOCH: 8
+
+#mplug
+model: mplug
+BertTokenizer: bert-base-uncased
+Bert_version_path: 'ckpts/bert-base-uncased'
+mplug_optimizer: {opt: adamW, lr1: 3e-5, lr2: 1e-6, weight_decay: 0.02}
+mplug_schedular: {sched: cosine, lr: 3e-5, epochs: 8, min_lr: 1e-6, decay_rate: 1, warmup_lr: 1e-6, warmup_epochs: 4, cooldown_epochs: 0}
+deepspeed: True
+
+bert_config: 'configs/config_bert.json'
+vision_width: 1024
+use_checkpoint: True
+clip_path: "ckpts/ViT-L-14"
+image_res: 336
+text_encoder: 'ckpts/bert-base-uncased'
+text_decoder: 'ckpts/bert-base-uncased'
+distill: True
+beam_size: 20
+data_root: 'datasets'
+add_ocr: True
+add_object: True
+PRETRAINED_MODEL_PATH: ckpts/vqav2.pth  
+warm_up: True
+alpha: 0.4
+
+answer_list_path: assets/answer_list.json
+k_test: 128
+eos: '[SEP]'
+distributed: True
+Generate_mode: greedy
+max_input_length: 80

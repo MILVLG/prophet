@@ -1,23 +1,56 @@
 prophet
 ├── assets
+│   ├── aokvqa
+│   │   ├── aok_candidate_test.json
+│   │   ├── aok_candidate_val.json
+│   │   ├── aok_cot.json
+│   │   ├── aok_examples_test.json
+│   │   ├── aok_examples_val.json
+│   │   ├── aok_test.json
+│   │   ├── aok_train.json
+│   │   ├── aok_val.json
+│   │   └── aok_val_label.json
+│   ├── okvqa
+│   │   ├── ok_candidates.json
+│   │   ├── ok_cot.json
+│   │   ├── ok_examples.json
+│   │   ├── ok_train.json
+│   │   ├── ok_val.json
+│   │   └── ok_val_labels.json
+│   ├── scienceqa
+│   │   ├── sci_candidates.json
+│   │   ├── sci_caption.json
+│   │   ├── sci_choices.json
+│   │   ├── sci_cot.json
+│   │   ├── sci_example.json
+│   │   ├── sci_test.json
+│   │   ├── sci_test_label.json
+│   │   ├── sci_train.json
+│   │   └── sci_val.json
+│   └── textvqa
+│   │   ├── ST_train_ocr.json
+│   │   ├── ST_val_ocr.json
+│   │   ├── text_candidates.json
+│   │   ├── text_caption.json
+│   │   ├── text_cot.json
+│   │   ├── text_example.json
+│   │   ├── text_test.json
+│   │   ├── text_train.json
+│   │   ├── text_val.json
+│   │   └── text_val_labels.json
 │   ├── answer_aware_examples_okvqa.json
 │   ├── answer_dict_aokvqa.json
 │   ├── answer_dict_okvqa.json
-│   ├── answer_dict_vqav2.json
-│   ├── candidates_aokvqa_test.json
-│   ├── candidates_aokvqa_val.json
-│   ├── candidates_okvqa.json
-│   ├── captions_aokvqa.json
-│   ├── captions_okvqa.json
-│   ├── examples_aokvqa_test.json.json
-│   └── examples_aokvqa_val.json.json
+│   └── answer_dict_vqav2.json
 ├── ckpts
-│   ├── mcan_ft_aokvqa_test.pkl
-│   ├── mcan_ft_aokvqa_val.pkl
-│   ├── mcan_ft_okvqa.pkl
-│   ├── mcan_pt_aokvqa_test.pkl
-│   └── mcan_pt_aokvqa_val.pkl
-│   ├── mcan_pt_okvqa.pkl
+│   ├── bert-base-uncased
+│   ├── vqav2.pth
+│   ├── aok_test.pt
+│   ├── aok_val.pt
+│   ├── ok.pt
+│   ├── scienceqa.pt
+│   ├── textqa_val.pt
+│   └── ViT-L-14
 ├── configs
 │   ├── finetune.yml
 │   ├── path_cfgs.py
