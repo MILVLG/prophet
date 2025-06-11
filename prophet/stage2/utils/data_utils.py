@@ -27,24 +27,6 @@ def ok_score(gt_answers):
             ans2score[ans] = 1.0
     return ans2score
 
-def text_score(gt_answers):
-    # gt_answers = [a['answer'] for a in gt_answers]
-    ans2cnt = Counter(gt_answers)
-    # sort
-    ans2cnt = sorted(ans2cnt.items(), key=lambda x: x[1], reverse=True)
-    ans2score = {}
-    for ans, cnt in ans2cnt:
-        # ans2score[ans] = min(1.0, cnt / 3.0)
-        if cnt == 1:
-            ans2score[ans] = 0.3
-        elif cnt == 2:
-            ans2score[ans] = 0.6
-        elif cnt == 3:
-            ans2score[ans] = 0.9
-        else:
-            ans2score[ans] = 1.0
-    return ans2score
-
 def aok_score(gt_answers):
     gt_answers = [a for a in gt_answers]
     ans2cnt = Counter(gt_answers)
@@ -59,13 +41,6 @@ def aok_score(gt_answers):
             ans2score[ans] = 2 / 3.
         else:
             ans2score[ans] = 1.
-    return ans2score
-
-def science_score(item):
-    idx=item['choices'].index(item['answer'][0])
-    maps={0:'A',1:'B',2:'C',3:'D',4:'E',5:'F',6:'G',7:'H',8:'I',9:'J'}
-    ans2score = {maps[idx].lower():1.}
-    # print(ans2score)
     return ans2score
 
 
@@ -100,18 +75,12 @@ class Qid2Data(Dict):
 
         iid_to_capt = json.load(open(__C.CAPTIONS_PATH))
         
-        if 'aok' in __C.TASK:
-            _score = aok_score 
-        elif 'text' in __C.TASK:
-            _score=text_score
-        else:
-            _score=ok_score
+        _score = aok_score if 'aok' in __C.TASK else ok_score
         
         qid_to_data = {}
         # ques_set = ques_set['questions']
         # anno_set = anno_set['annotations']
         for qid in qid_to_ques:
-            qid=str(qid)
             q_item = qid_to_ques[qid]
             t_item = qid_to_topk[qid]
 
@@ -131,18 +100,12 @@ class Qid2Data(Dict):
             }
             if annotated:
                 a_item = qid_to_anno[qid]
-                # print(a_item)
-                # quit()
-                if 'science' in __C.TASK:
-                    ans2score = science_score(a_item)
+                if 'answers' in a_item:
+                    answers = a_item['answers']
                 else:
-                    if 'answers' in a_item:
-                        answers = a_item['answers']
-                    elif 'answer' in a_item:
-                        answers = a_item['answer']
-                    else:
-                        answers = a_item['direct_answers']
-                    ans2score = _score(answers)
+                    answers = a_item['direct_answers']
+
+                ans2score = _score(answers)
 
                 most_answer = list(ans2score.keys())[0]
                 if most_answer == '':
@@ -169,7 +132,7 @@ class Qid2Data(Dict):
         
 
     def __getitem__(self, __key):
-        return self.qid_to_data[str(__key)]
+        return self.qid_to_data[__key]
     
 
     def get_caption(self, qid):
