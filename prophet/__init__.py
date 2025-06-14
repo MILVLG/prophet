@@ -2,7 +2,6 @@ __author__ = 'Zhenwei Shao'
 __version__ = '1.0'
 
 import argparse
-import deepspeed
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -22,8 +21,7 @@ def get_args():
     parser.add_argument('--examples_path', dest='EXAMPLES_PATH', help='answer-aware example file path, default: "assets/answer_aware_examples_for_ok.json"', type=str, default=None)
     parser.add_argument('--candidates_path', dest='CANDIDATES_PATH', help='candidates file path, default: "assets/candidates_for_ok.json"', type=str, default=None)
     parser.add_argument('--captions_path', dest='CAPTIONS_PATH', help='captions file path, default: "assets/captions_for_ok.json"', type=str, default=None)
-    parser.add_argument('--cot_path', dest='CoT_PATH', help='openai api key', type=str, default=None)
-    parser = deepspeed.add_config_arguments(parser)
+    parser.add_argument('--openai_key', dest='OPENAI_KEY', help='openai api key', type=str, default=None)
     args = parser.parse_args()
     return args
 
@@ -36,16 +34,8 @@ def get_runner(__C, evaluater):
         from .stage1.finetune import Runner
     elif __C.RUN_MODE == 'finetune_test':
         from .stage1.finetune import Runner
-    elif __C.RUN_MODE == 'finetune_mplug':
-        from .stage1.finetune_mplug import Runner
-    elif __C.RUN_MODE == 'finetune_mplug_test':
-        from .stage1.finetune_mplug import Runner
     elif __C.RUN_MODE == 'heuristics':
         from .stage1.heuristics import Runner
-    elif __C.RUN_MODE == 'heuristics_mplug':
-        from .stage1.heuristics_mplug import Runner
-    elif __C.RUN_MODE == 'cot_gen':
-        from .stage1.cot_gen import Runner
     elif __C.RUN_MODE == 'prompt':
         from .stage2.prompt import Runner
     else:

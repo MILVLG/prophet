@@ -16,7 +16,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-TASK=${TASK:-ok} # task name, one of ['ok', 'aok_val', 'aok_test','text_val','science'], default 'ok'
+TASK=${TASK:-ok} # task name, one of ['ok', 'aok_val', 'aok_test'], default 'ok'
 RESULT_PATH=${RESULT_PATH:-"preds/prophet_611_okvqa.json"} # path to the result file, default is the result from our experiments
 
 if [ $TASK == "ok" ]; then

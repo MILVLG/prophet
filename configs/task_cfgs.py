@@ -24,13 +24,8 @@ class Cfgs(PATH):
             self.GPU_IDS = [int(i) for i in self.GPU.split(',')]
             # print(f'Avaliable GPUs: {torch.cuda.device_count()}')
             # print(f'Using GPU {self.GPU}')
-            self.MPLUG = getattr(args, 'MPLUG', False)
-            if self.MPLUG!=False:
-                os.environ['CUDA_VISIBLE_DEVICES'] = self.GPU
-            else:    
-                self.CURRENT_GPU = self.GPU_IDS[0]
-                torch.cuda.set_device(f'cuda:{self.CURRENT_GPU}')
-            os.environ['CUDA_VISIBLE_DEVICES'] = self.GPU
+            self.CURRENT_GPU = self.GPU_IDS[0]
+            torch.cuda.set_device(f'cuda:{self.CURRENT_GPU}')
             self.N_GPU = len(self.GPU_IDS)
             self.SEED = getattr(args, 'SEED', 1111)
             torch.manual_seed(self.SEED)
@@ -84,10 +79,10 @@ class Cfgs(PATH):
         # ----------------------
 
         self.TASK = getattr(args, 'TASK', 'ok')
-        assert self.TASK in ['ok', 'aok_val', 'aok_test','text_val','text_test','science_test']
+        assert self.TASK in ['ok', 'aok_val', 'aok_test']
 
         self.RUN_MODE = getattr(args, 'RUN_MODE', 'finetune')
-        assert self.RUN_MODE in ['pretrain', 'finetune', 'finetune_test', 'heuristics', 'heuristics_mplug','prompt','finetune_mplug','finetune_mplug_test','cot_gen']
+        assert self.RUN_MODE in ['pretrain', 'finetune', 'finetune_test', 'heuristics', 'prompt']
 
         if self.RUN_MODE == 'pretrain':
             self.DATA_TAG = 'v2'  # used to config answer dict
