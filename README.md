@@ -9,7 +9,7 @@ This repository is the official implementation of the Prophet++, a two stage fra
 
 ## Updates
 ### Prophet++
-June 6, 2025
+June 14, 2025
 - Training and testing codes of the Prophet++ framework on A-OKVQA, OKVQA, Textvqa and ScienceQA. [Code base](https://github.com/bruceisme/prophet/tree/mplug)
 
 ### Prophet
